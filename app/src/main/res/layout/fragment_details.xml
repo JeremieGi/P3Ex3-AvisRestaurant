@@ -71,6 +71,66 @@
             android:text="(200)"
             />
 
+        <ProgressBar
+            android:id="@+id/progressbar_Rate5"
+            style="@style/CustomProgressBarStyle"
+            android:layout_height="@dimen/progressbar_height"
+            android:layout_width="@dimen/progressbar_width"
+            android:layout_marginHorizontal="20dp"
+            android:isIndicator="true"
+            android:progress="25"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvReviewsAverage"
+            app:layout_constraintTop_toTopOf="@id/tvReviewsAverage" />
+
+        <ProgressBar
+            android:id="@+id/progressbar_Rate4"
+            style="@style/CustomProgressBarStyle"
+            android:layout_height="@dimen/progressbar_height"
+            android:layout_width="@dimen/progressbar_width"
+            android:isIndicator="true"
+            android:progress="25"
+            android:layout_marginTop="@dimen/marge_between_progressbar"
+            app:layout_constraintEnd_toEndOf="@+id/progressbar_Rate5"
+            app:layout_constraintStart_toStartOf="@id/progressbar_Rate5"
+            app:layout_constraintTop_toBottomOf="@id/progressbar_Rate5" />
+
+        <ProgressBar
+            android:id="@+id/progressbar_Rate3"
+            style="@style/CustomProgressBarStyle"
+            android:layout_height="@dimen/progressbar_height"
+            android:layout_width="@dimen/progressbar_width"
+            android:isIndicator="true"
+            android:progress="25"
+            android:layout_marginTop="@dimen/marge_between_progressbar"
+            app:layout_constraintEnd_toEndOf="@+id/progressbar_Rate4"
+            app:layout_constraintStart_toStartOf="@id/progressbar_Rate4"
+            app:layout_constraintTop_toBottomOf="@id/progressbar_Rate4" />
+
+        <ProgressBar
+            android:id="@+id/progressbar_Rate2"
+            style="@style/CustomProgressBarStyle"
+            android:layout_height="@dimen/progressbar_height"
+            android:layout_width="@dimen/progressbar_width"
+            android:isIndicator="true"
+            android:progress="25"
+            android:layout_marginTop="@dimen/marge_between_progressbar"
+            app:layout_constraintEnd_toEndOf="@+id/progressbar_Rate3"
+            app:layout_constraintStart_toStartOf="@id/progressbar_Rate3"
+            app:layout_constraintTop_toBottomOf="@id/progressbar_Rate3" />
+
+        <ProgressBar
+            android:id="@+id/progressbar_Rate1"
+            style="@style/CustomProgressBarStyle"
+            android:layout_height="@dimen/progressbar_height"
+            android:layout_width="@dimen/progressbar_width"
+            android:isIndicator="true"
+            android:progress="25"
+            android:layout_marginTop="@dimen/marge_between_progressbar"
+            app:layout_constraintEnd_toEndOf="@+id/progressbar_Rate2"
+            app:layout_constraintStart_toStartOf="@id/progressbar_Rate2"
+            app:layout_constraintTop_toBottomOf="@id/progressbar_Rate2" />
+
         <TextView
             android:id="@+id/tvRestaurantType"
             android:layout_width="0dp"

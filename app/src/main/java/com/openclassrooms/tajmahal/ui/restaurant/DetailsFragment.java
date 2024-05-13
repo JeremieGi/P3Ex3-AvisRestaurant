@@ -76,8 +76,8 @@ public class DetailsFragment extends Fragment {
         detailsViewModel.getTajMahalReviews().observe(requireActivity(), this::updateAveragesReviews);
 
         detailsViewModel.oAverage.observe(requireActivity(), this::displayAverage);
+        detailsViewModel.oPercentPerNote.observe(requireActivity(), this::displayPercentPerNote);
     }
-
 
 
 
@@ -146,10 +146,13 @@ public class DetailsFragment extends Fragment {
     private void updateAveragesReviews(List<Review> reviews) {
 
         // ----------- GENERAL AVERAGE -----------
-        detailsViewModel.getTajMahalReviewsAverage(reviews);
+        detailsViewModel.setTajMahalReviewsAverage(reviews);
 
         int nNbReviews = reviews.size();
         binding.tvReviewsCount.setText("("+nNbReviews+")");
+
+        // ----------- REPARTITION OF RATE -----------
+        detailsViewModel.setTajMahalReviewsRepartition(reviews);
 
     }
 
@@ -165,6 +168,39 @@ public class DetailsFragment extends Fragment {
         binding.rbReviewsAverage.setRating(fNote);
 
     }
+
+    private void displayPercentPerNote(int[] anRateP) {
+
+        // Parcours des notes
+        for (int nNote=0; nNote<anRateP.length; nNote++){
+
+            switch (nNote){
+                case 0 :
+                    // #TODO : A voir avec Denis, pour l'instant j'affiche pas les notes à 0 (je considère que pas possible)
+                    break;
+                case 1 :
+                    binding.progressbarRate1.setProgress(anRateP[nNote]);
+                    break;
+                case 2 :
+                    binding.progressbarRate2.setProgress(anRateP[nNote]);
+                    break;
+                case 3 :
+                    binding.progressbarRate3.setProgress(anRateP[nNote]);
+                    break;
+                case 4 :
+                    binding.progressbarRate4.setProgress(anRateP[nNote]);
+                    break;
+                case 5 :
+                    binding.progressbarRate5.setProgress(anRateP[nNote]);
+                    break;
+                default :
+                    assert false : "Note impossible";
+            }
+
+        }
+
+    }
+
 
 
 

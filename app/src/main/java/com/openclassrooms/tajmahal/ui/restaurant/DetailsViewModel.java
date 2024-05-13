@@ -15,7 +15,9 @@ import javax.inject.Inject;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
@@ -34,6 +36,7 @@ public class DetailsViewModel extends ViewModel {
     // Ces variables seront exposées à la vue (Etats)
 
     MutableLiveData<Double> oAverage = new MutableLiveData<Double>();
+    MutableLiveData<int[]> oPercentPerNote = new MutableLiveData<int[]>();
 
     public final static int CST_NOTE_MAX = 5;
 
@@ -98,7 +101,7 @@ public class DetailsViewModel extends ViewModel {
         return dayString;
     }
 
-    public void getTajMahalReviewsAverage(List<Review> reviews) {
+    public void setTajMahalReviewsAverage(List<Review> reviews) {
 
         Double rAverage;
 
@@ -120,4 +123,36 @@ public class DetailsViewModel extends ViewModel {
 
     }
 
+    public void setTajMahalReviewsRepartition(List<Review> reviews) {
+
+        int[] anPercentPerNote = new int[CST_NOTE_MAX+1];
+
+        int nTotalReview = reviews.size();
+        if (nTotalReview>0){
+
+            // Utilisation d'un tableau indicé par note qui compte le nombre de note 0,1,..5
+            Map<Integer, Integer> map = new HashMap<>();
+            for (Review r : reviews) {
+                int nRate = r.getRate();
+                int nNbReview = 0;
+                if (map.containsKey(nRate)) {
+                    nNbReview = map.get(nRate);
+                }
+                nNbReview++;
+                map.put(nRate,nNbReview);
+            }
+
+            for (int i = 0; i<=CST_NOTE_MAX; i++){
+                if (map.containsKey(i)){
+                    int nNbReview = map.get(i);
+                    anPercentPerNote[i] = nNbReview *100 / nTotalReview ;
+                }
+            }
+
+
+        }
+
+        oPercentPerNote.postValue(anPercentPerNote);
+
+    }
 }

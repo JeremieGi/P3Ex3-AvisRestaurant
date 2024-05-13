@@ -148,6 +148,8 @@ public class DetailsFragment extends Fragment {
         // ----------- GENERAL AVERAGE -----------
         detailsViewModel.getTajMahalReviewsAverage(reviews);
 
+        int nNbReviews = reviews.size();
+        binding.tvReviewsCount.setText("("+nNbReviews+")");
 
     }
 
@@ -158,6 +160,9 @@ public class DetailsFragment extends Fragment {
         String sAvg = format.format(rAverage);
 
         binding.tvReviewsAverage.setText(sAvg);
+
+        Float fNote = (float) (rAverage.floatValue());
+        binding.rbReviewsAverage.setRating(fNote);
 
     }
 

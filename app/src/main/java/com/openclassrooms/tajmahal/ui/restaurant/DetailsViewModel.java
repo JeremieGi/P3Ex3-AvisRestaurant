@@ -32,9 +32,10 @@ public class DetailsViewModel extends ViewModel {
     private final RestaurantRepository restaurantRepository;
 
     // Ces variables seront exposées à la vue (Etats)
+
     MutableLiveData<Double> oAverage = new MutableLiveData<Double>();
 
-
+    public final static int CST_NOTE_MAX = 5;
 
     /**
      * Constructor that Hilt will use to create an instance of MainViewModel.

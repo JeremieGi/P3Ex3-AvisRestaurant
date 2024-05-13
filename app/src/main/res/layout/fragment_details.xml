@@ -34,6 +34,44 @@
             tools:text="Taj Mahal" />
 
         <TextView
+            android:id="@+id/tvReviewsAverage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jakarta_bold"
+            android:text="3.5"
+            android:textSize="24dp"
+            app:layout_constraintStart_toStartOf="@id/tvRestaurantName"
+            app:layout_constraintEnd_toEndOf="@id/tvRestaurantName"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            android:gravity="center"
+            android:layout_marginTop="91dp"/>
+
+        <RatingBar
+            android:id="@+id/rbReviewsAverage"
+            android:layout_width="60dp"
+            android:layout_height="12dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="3.5"
+            app:layout_constraintEnd_toEndOf="@id/tvReviewsAverage"
+            app:layout_constraintStart_toStartOf="@id/tvReviewsAverage"
+            app:layout_constraintTop_toBottomOf="@id/tvReviewsAverage"
+            style="@style/foodRatingBar" />
+
+        <TextView
+            android:id="@+id/tvReviewsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jakarta_regular"
+            android:textColor="#666666"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/tvReviewsAverage"
+            app:layout_constraintStart_toStartOf="@id/tvReviewsAverage"
+            app:layout_constraintTop_toBottomOf="@id/rbReviewsAverage"
+            android:text="(200)"
+            />
+
+        <TextView
             android:id="@+id/tvRestaurantType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -90,7 +128,7 @@
             android:layout_width="0dp"
             android:layout_height="0.75dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="100dp"
 
             android:background="#DADADA"
             app:layout_constraintBottom_toTopOf="@+id/tvRestaurantHours"
@@ -250,14 +288,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvRestaurantPhoneNumber" />
 
-        <TextView
-            android:id="@+id/tvReviewsAverage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3.5"
-            android:textSize="24dp"
-            app:layout_constraintStart_toStartOf="@id/tvRestaurantType"
-            app:layout_constraintTop_toBottomOf="@id/tvRestaurantName" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

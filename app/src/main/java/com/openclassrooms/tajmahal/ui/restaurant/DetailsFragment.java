@@ -22,7 +22,7 @@ import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
 import java.text.DecimalFormat;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -41,6 +41,7 @@ public class DetailsFragment extends Fragment {
     private FragmentDetailsBinding binding;
 
     private DetailsViewModel detailsViewModel;
+
 
     /**
      * This method is called when the fragment is first created.
@@ -73,7 +74,10 @@ public class DetailsFragment extends Fragment {
 
         // Observes changes the customer's reviews
         detailsViewModel.getTajMahalReviews().observe(requireActivity(), this::updateAveragesReviews);
+
+        detailsViewModel.oAverage.observe(requireActivity(), this::displayAverage);
     }
+
 
 
 
@@ -137,11 +141,17 @@ public class DetailsFragment extends Fragment {
 
     /**
      * Observe the reviews and update the differents averages
-     * @param reviews
+     * @param reviews : list of customers review
      */
     private void updateAveragesReviews(List<Review> reviews) {
 
-        Double rAverage = getTajMahalReviewsAverage(reviews);
+        // ----------- GENERAL AVERAGE -----------
+        detailsViewModel.getTajMahalReviewsAverage(reviews);
+
+
+    }
+
+    private void displayAverage(Double rAverage) {
 
         // Format the average
         DecimalFormat format = new DecimalFormat("#.0");
@@ -149,23 +159,6 @@ public class DetailsFragment extends Fragment {
 
         binding.tvReviewsAverage.setText(sAvg);
 
-    }
-
-    public Double getTajMahalReviewsAverage(List<Review> reviews) {
-
-        if (reviews == null || reviews.isEmpty()) {
-            // Empty list or null
-            return 0.0;
-        }
-
-        int[] anReview = new int[reviews.size()];
-        int i = 0;
-        for (Review r : reviews) {
-            anReview[i] = r.getRate();
-            i++;
-        }
-
-        return Arrays.stream(anReview).average().orElse(0.0);
     }
 
 

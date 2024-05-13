@@ -3,6 +3,7 @@ package com.openclassrooms.tajmahal.ui.restaurant;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.openclassrooms.tajmahal.R;
@@ -29,6 +30,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 public class DetailsViewModel extends ViewModel {
 
     private final RestaurantRepository restaurantRepository;
+
+    // Ces variables seront exposées à la vue (Etats)
+    MutableLiveData<Double> oAverage = new MutableLiveData<Double>();
+
+
 
     /**
      * Constructor that Hilt will use to create an instance of MainViewModel.
@@ -91,6 +97,26 @@ public class DetailsViewModel extends ViewModel {
         return dayString;
     }
 
+    public void getTajMahalReviewsAverage(List<Review> reviews) {
 
+        Double rAverage;
+
+        if (reviews == null || reviews.isEmpty()) {
+            // Empty list or null
+            rAverage = 0.0;
+        }
+        else{
+            int[] anReview = new int[reviews.size()];
+            int i = 0;
+            for (Review r : reviews) {
+                anReview[i] = r.getRate();
+                i++;
+            }
+            rAverage = Arrays.stream(anReview).average().orElse(0.0);
+        }
+
+        oAverage.postValue(rAverage);
+
+    }
 
 }

@@ -68,6 +68,8 @@ public class DetailsFragment extends Fragment {
         setupUI(); // Sets up user interface components.
         setupViewModel(); // Prepares the ViewModel for the fragment.
 
+        // OBSERVERS
+
         // Observes changes in the restaurant data and updates the UI accordingly.
         detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant);
 
@@ -76,6 +78,14 @@ public class DetailsFragment extends Fragment {
 
         detailsViewModel.oAverage.observe(requireActivity(), this::displayAverage);
         detailsViewModel.oPercentPerNote.observe(requireActivity(), this::displayPercentPerNote);
+
+        // LISTENER
+        binding.buttonAddReview.setOnClickListener(v -> {
+
+            // Ouvrir le fragment de saisie et d'affichage des avis
+
+        });
+
     }
 
 

@@ -250,5 +250,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvRestaurantPhoneNumber" />
 
+        <TextView
+            android:id="@+id/tvReviewsAverage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3.5"
+            android:textSize="24dp"
+            app:layout_constraintStart_toStartOf="@id/tvRestaurantType"
+            app:layout_constraintTop_toBottomOf="@id/tvRestaurantName" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

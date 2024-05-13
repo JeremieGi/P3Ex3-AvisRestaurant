@@ -8,7 +8,7 @@
     <style name="Theme.TajMahal" parent="Base.Theme.TajMahal" >
 
         <item name="android:windowBackground">@drawable/splash_background</item>
-        <item name="android:splashScreenTheme">@drawable/splash_background</item>
+        <item name="android:splashScreenTheme" tools:targetApi="s">@drawable/splash_background</item>
         <item name="android:statusBarColor">@color/red</item>
     </style>
 

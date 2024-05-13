@@ -44,7 +44,8 @@
             app:layout_constraintEnd_toEndOf="@id/tvRestaurantName"
             app:layout_constraintTop_toBottomOf="@id/image"
             android:gravity="center"
-            android:layout_marginTop="91dp"/>
+            android:layout_marginTop="91dp"
+            tools:ignore="HardcodedText" />
 
         <RatingBar
             android:id="@+id/rbReviewsAverage"
@@ -57,6 +58,8 @@
             app:layout_constraintStart_toStartOf="@id/tvReviewsAverage"
             app:layout_constraintTop_toBottomOf="@id/tvReviewsAverage"
             style="@style/foodRatingBar" />
+        <!-- TODO : Voir Denis
+        Le point car j'ai importé le png depuis figma + créer un fichierratingstar.xml que j'appelle depuis un style.-->
 
         <TextView
             android:id="@+id/tvReviewsCount"
@@ -76,7 +79,6 @@
             style="@style/CustomProgressBarStyle"
             android:layout_height="@dimen/progressbar_height"
             android:layout_width="@dimen/progressbar_width"
-            android:layout_marginHorizontal="20dp"
             android:isIndicator="true"
             android:progress="25"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,6 +96,14 @@
             app:layout_constraintEnd_toEndOf="@+id/progressbar_Rate5"
             app:layout_constraintStart_toStartOf="@id/progressbar_Rate5"
             app:layout_constraintTop_toBottomOf="@id/progressbar_Rate5" />
+
+        <!-- 	TODO avec Denis
+            dANS @+id/progressbar_Rate5? REMPLACER android:layout_width="@dimen/progressbar_width"
+			Par
+			android:layout_marginStart="30dp"
+			android:layout_marginEnd="20dp"
+			=> Erreur à l'exec You must supply a layout_width attribute.
+           -->
 
         <ProgressBar
             android:id="@+id/progressbar_Rate3"

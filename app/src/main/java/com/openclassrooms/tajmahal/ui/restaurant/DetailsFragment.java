@@ -22,7 +22,6 @@ import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -140,7 +139,7 @@ public class DetailsFragment extends Fragment {
     }
 
     /**
-     * Observe the reviews and update the differents averages
+     * Observe the reviews and update the different averages
      * @param reviews : list of customers review
      */
     private void updateAveragesReviews(List<Review> reviews) {
@@ -149,13 +148,18 @@ public class DetailsFragment extends Fragment {
         detailsViewModel.setTajMahalReviewsAverage(reviews);
 
         int nNbReviews = reviews.size();
-        binding.tvReviewsCount.setText("("+nNbReviews+")");
+        String sNbReview = "("+nNbReviews+")";
+        binding.tvReviewsCount.setText(sNbReview);
 
         // ----------- REPARTITION OF RATE -----------
         detailsViewModel.setTajMahalReviewsRepartition(reviews);
 
     }
 
+    /**
+     * Display the average of all reviews
+     * @param rAverage : Average (calculated by MV)
+     */
     private void displayAverage(Double rAverage) {
 
         // Format the average
@@ -164,34 +168,38 @@ public class DetailsFragment extends Fragment {
 
         binding.tvReviewsAverage.setText(sAvg);
 
-        Float fNote = (float) (rAverage.floatValue());
+        float fNote = (float) (rAverage.floatValue());
         binding.rbReviewsAverage.setRating(fNote);
 
     }
 
+    /**
+     * Display the repartition of rate (0,1,...5)
+     * @param anRateP index = note and value = percentage
+     */
     private void displayPercentPerNote(int[] anRateP) {
 
-        // Parcours des notes
-        for (int nNote=0; nNote<anRateP.length; nNote++){
+        // Browse the rate array
+        for (int nRate=0; nRate<anRateP.length; nRate++){
 
-            switch (nNote){
+            switch (nRate){
                 case 0 :
                     // #TODO : A voir avec Denis, pour l'instant j'affiche pas les notes à 0 (je considère que pas possible)
                     break;
                 case 1 :
-                    binding.progressbarRate1.setProgress(anRateP[nNote]);
+                    binding.progressbarRate1.setProgress(anRateP[nRate]);
                     break;
                 case 2 :
-                    binding.progressbarRate2.setProgress(anRateP[nNote]);
+                    binding.progressbarRate2.setProgress(anRateP[nRate]);
                     break;
                 case 3 :
-                    binding.progressbarRate3.setProgress(anRateP[nNote]);
+                    binding.progressbarRate3.setProgress(anRateP[nRate]);
                     break;
                 case 4 :
-                    binding.progressbarRate4.setProgress(anRateP[nNote]);
+                    binding.progressbarRate4.setProgress(anRateP[nRate]);
                     break;
                 case 5 :
-                    binding.progressbarRate5.setProgress(anRateP[nNote]);
+                    binding.progressbarRate5.setProgress(anRateP[nRate]);
                     break;
                 default :
                     assert false : "Note impossible";

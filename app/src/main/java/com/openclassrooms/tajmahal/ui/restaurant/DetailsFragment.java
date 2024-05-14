@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -101,14 +103,23 @@ public class DetailsFragment extends Fragment {
 
         // LISTENER
         binding.buttonAddReview.setOnClickListener(v -> {
-
             // open fragment to add a new review or see all reviews
-
+            goToReviewFragment();
         });
 
 
     }
 
+    /**
+     * open fragment to add a new review or see all reviews
+     */
+    private void goToReviewFragment() {
+       ReviewFragment reviewFragment = ReviewFragment.newInstance();
+       FragmentManager fragmentManager = getParentFragmentManager();
+       FragmentTransaction fragmentTransaction = fragmentManager
+                .beginTransaction();
+       fragmentTransaction.replace(R.id.container, reviewFragment).commit();
+    }
 
 
     /**

@@ -38,8 +38,9 @@ android {
 }
 
 dependencies {
-    
+
     implementation("androidx.work:work-runtime:2.8.1")
+    
 
     val hiltVersion = "2.44"
 

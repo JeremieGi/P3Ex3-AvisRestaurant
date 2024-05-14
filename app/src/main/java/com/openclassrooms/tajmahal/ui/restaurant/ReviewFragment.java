@@ -3,11 +3,13 @@ package com.openclassrooms.tajmahal.ui.restaurant;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.view.ViewGroup;
 import com.openclassrooms.tajmahal.databinding.FragmentReviewBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
+import com.openclassrooms.tajmahal.ui.adapter.ReviewAdapter;
 
 import java.util.List;
 
@@ -27,6 +30,8 @@ public class ReviewFragment extends Fragment {
     private FragmentReviewBinding binding;
 
     private ReviewViewModel mViewModel;
+
+    private ReviewAdapter reviewAdapter;
 
     public static ReviewFragment newInstance() {
         return new ReviewFragment();
@@ -41,7 +46,9 @@ public class ReviewFragment extends Fragment {
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
     }
 
     /**
@@ -78,6 +85,13 @@ public class ReviewFragment extends Fragment {
 
         setupViewModel(); // Prepares the ViewModel for the fragment.
 
+        // Recycler View
+        binding.fragmentReviewRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        //binding.fragmentReviewRecyclerview.setHasFixedSize(true);
+        reviewAdapter = new ReviewAdapter();
+        binding.fragmentReviewRecyclerview.setAdapter(reviewAdapter);
+
+
         // OBSERVERS
 
         // Observes changes in the restaurant data and updates the UI accordingly.
@@ -90,25 +104,30 @@ public class ReviewFragment extends Fragment {
         // LISTENERS
 
         // Button back of toolbar
-        binding.toolbarReview.toolbar.setNavigationOnClickListener(view1 ->
+        binding.fragmentReviewToolbar.toolbar.setNavigationOnClickListener(view1 ->
                 requireActivity().getSupportFragmentManager().popBackStack()
         );
+
+
     }
+
+
 
     /**
      * Display restaurant name in the Action Bar information
-     * @param restaurant
+     * @param restaurant : Restaurant of the application
      */
     private void updateUIWithRestaurant(Restaurant restaurant) {
-        binding.toolbarReview.toolbar.setTitle(restaurant.getName());
-
+        binding.fragmentReviewToolbar.toolbar.setTitle(restaurant.getName());
     }
 
     /**
      * Display all reviews
-     * @param reviews
+     * @param reviews : reviews
      */
     private void updateUIWithReviews(List<Review> reviews) {
+
+        reviewAdapter.setReviews(reviews);
 
     }
 

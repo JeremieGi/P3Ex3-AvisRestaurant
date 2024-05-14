@@ -52,6 +52,24 @@ public class DetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
+
+    /**
+     * Creates and returns the view hierarchy associated with the fragment.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container If non-null, this is the parent view that the fragment's UI should be attached to.
+     * The fragment should not add the view itself but return it.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     * @return Returns the View for the fragment's UI, or null.
+     */
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentDetailsBinding.inflate(inflater, container, false); // Binds the layout using view binding.
+        return binding.getRoot(); // Returns the root view.
+    }
+
     /**
      * This method is called immediately after `onCreateView()`.
      * Use this method to perform final initialization once the fragment views have been inflated.
@@ -91,23 +109,6 @@ public class DetailsFragment extends Fragment {
 
     }
 
-
-
-    /**
-     * Creates and returns the view hierarchy associated with the fragment.
-     *
-     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container If non-null, this is the parent view that the fragment's UI should be attached to.
-     * The fragment should not add the view itself but return it.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
-     * @return Returns the View for the fragment's UI, or null.
-     */
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentDetailsBinding.inflate(inflater, container, false); // Binds the layout using view binding.
-        return binding.getRoot(); // Returns the root view.
-    }
 
 
     /**

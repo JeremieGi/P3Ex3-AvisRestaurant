@@ -31,7 +31,6 @@ public class RestaurantRepository {
     // The API interface instance that will be used for network requests related to restaurant data.
     private final RestaurantApi restaurantApi;
 
-
     public final static int CST_NOTE_MAX = 5;
 
     /**

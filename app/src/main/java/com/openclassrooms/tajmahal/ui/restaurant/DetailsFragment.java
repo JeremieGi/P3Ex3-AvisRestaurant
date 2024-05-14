@@ -19,10 +19,8 @@ import android.widget.Toast;
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.FragmentDetailsBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
-import com.openclassrooms.tajmahal.domain.model.Review;
 
 import java.text.DecimalFormat;
-import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -73,18 +71,23 @@ public class DetailsFragment extends Fragment {
         // Observes changes in the restaurant data and updates the UI accordingly.
         detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant);
 
-        // Observes changes the customer's reviews
-        detailsViewModel.getTajMahalReviews().observe(requireActivity(), this::updateAveragesReviews);
-
         detailsViewModel.oAverage.observe(requireActivity(), this::displayAverage);
+        detailsViewModel.oTotalReviews.observe(requireActivity(), this::displayTotal);
         detailsViewModel.oPercentPerNote.observe(requireActivity(), this::displayPercentPerNote);
+
+        // Calculate averages
+        detailsViewModel.calculateReviewsAverage();
+        detailsViewModel.calculateReviewsTotal();
+        detailsViewModel.calculateReviewsRepartition();
+
 
         // LISTENER
         binding.buttonAddReview.setOnClickListener(v -> {
 
-            // Ouvrir le fragment de saisie et d'affichage des avis
+            // open fragment to add a new review or see all reviews
 
         });
+
 
     }
 
@@ -131,6 +134,7 @@ public class DetailsFragment extends Fragment {
      * @param restaurant The restaurant object containing details to be displayed.
      */
     private void updateUIWithRestaurant(Restaurant restaurant) {
+
         if (restaurant == null) return;
 
         binding.tvRestaurantName.setText(restaurant.getName());
@@ -146,29 +150,12 @@ public class DetailsFragment extends Fragment {
         binding.buttonAdress.setOnClickListener(v -> openMap(restaurant.getAddress()));
         binding.buttonPhone.setOnClickListener(v -> dialPhoneNumber(restaurant.getPhoneNumber()));
         binding.buttonWebsite.setOnClickListener(v -> openBrowser(restaurant.getWebsite()));
-    }
-
-    /**
-     * Observe the reviews and update the different averages
-     * @param reviews : list of customers review
-     */
-    private void updateAveragesReviews(List<Review> reviews) {
-
-        // ----------- GENERAL AVERAGE -----------
-        detailsViewModel.setTajMahalReviewsAverage(reviews);
-
-        int nNbReviews = reviews.size();
-        String sNbReview = "("+nNbReviews+")";
-        binding.tvReviewsCount.setText(sNbReview);
-
-        // ----------- REPARTITION OF RATE -----------
-        detailsViewModel.setTajMahalReviewsRepartition(reviews);
 
     }
 
     /**
      * Display the average of all reviews
-     * @param rAverage : Average (calculated by MV)
+     * @param rAverage : Average
      */
     private void displayAverage(Double rAverage) {
 
@@ -184,6 +171,16 @@ public class DetailsFragment extends Fragment {
     }
 
     /**
+     * Display the total of reviews
+     * @param nTotalP : total to display
+     */
+    private void displayTotal(Integer nTotalP) {
+        String sNbReview = "("+nTotalP+")";
+        binding.tvReviewsCount.setText(sNbReview);
+    }
+
+
+    /**
      * Display the repartition of rate (0,1,...5)
      * @param anRateP index = note and value = percentage
      */
@@ -194,7 +191,7 @@ public class DetailsFragment extends Fragment {
 
             switch (nRate){
                 case 0 :
-                    // #TODO : A voir avec Denis, pour l'instant j'affiche pas les notes à 0 (je considère que pas possible)
+                    // Vu avec Denis : Pas de note à 0
                     break;
                 case 1 :
                     binding.progressbarRate1.setProgress(anRateP[nRate]);
@@ -212,7 +209,7 @@ public class DetailsFragment extends Fragment {
                     binding.progressbarRate5.setProgress(anRateP[nRate]);
                     break;
                 default :
-                    assert false : "Note impossible";
+                    assert false : "Incorrect rate : "+nRate;
             }
 
         }

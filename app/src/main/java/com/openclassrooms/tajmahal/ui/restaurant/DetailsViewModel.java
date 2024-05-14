@@ -9,15 +9,11 @@ import androidx.lifecycle.ViewModel;
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.data.repository.RestaurantRepository;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
-import com.openclassrooms.tajmahal.domain.model.Review;
 
 import javax.inject.Inject;
 
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
@@ -36,9 +32,10 @@ public class DetailsViewModel extends ViewModel {
     // States observed by the DetailsFragment
 
     MutableLiveData<Double> oAverage = new MutableLiveData<>();
+    MutableLiveData<Integer> oTotalReviews = new MutableLiveData<>();
     MutableLiveData<int[]> oPercentPerNote = new MutableLiveData<>();
 
-    public final static int CST_NOTE_MAX = 5;
+
 
     /**
      * Constructor that Hilt will use to create an instance of MainViewModel.
@@ -59,9 +56,27 @@ public class DetailsViewModel extends ViewModel {
         return restaurantRepository.getRestaurant();
     }
 
-    public LiveData<List<Review>> getTajMahalReviews() {
-        return restaurantRepository.getReviews();
+    /**
+     * Calculate the average and post the value to the fragment
+     */
+    public void calculateReviewsAverage() {
+        if (this.restaurantRepository!=null){
+            Double rAvg = restaurantRepository.getReviewsAverage();
+            oAverage.postValue(rAvg);
+        }
     }
+
+    /**
+     * Calculate the total of reviews and post the value to the fragment
+     */
+    public void calculateReviewsTotal() {
+        if (this.restaurantRepository!=null){
+            Integer nTotal = restaurantRepository.getTotalReviews();
+            oTotalReviews.postValue(nTotal);
+        }
+    }
+
+
 
     /**
      * Retrieves the current day of the week in French.
@@ -101,67 +116,11 @@ public class DetailsViewModel extends ViewModel {
         return dayString;
     }
 
-    /**
-     * Calculate the reviews average and post the value to the fragment
-     * @param reviews : List of reviews
-     */
-    public void setTajMahalReviewsAverage(List<Review> reviews) {
-
-        double rAverage;
-
-        if (reviews == null || reviews.isEmpty()) {
-            // Empty list or null
-            rAverage = 0.0;
+    public void calculateReviewsRepartition() {
+        if (this.restaurantRepository!=null){
+            int[] anRepartition = restaurantRepository.getReviewsRepartition();
+            oPercentPerNote.postValue(anRepartition);
         }
-        else{
-            int[] anReview = new int[reviews.size()];
-            int i = 0;
-            for (Review r : reviews) {
-                anReview[i] = r.getRate();
-                i++;
-            }
-            rAverage = Arrays.stream(anReview).average().orElse(0.0);
-        }
-
-        oAverage.postValue(rAverage);
-
     }
 
-    /**
-     *  Calculate the reviews repartition by rate (0,1...5)
-     * @param : List of reviews
-     */
-    public void setTajMahalReviewsRepartition(List<Review> reviews) {
-
-        int[] anPercentPerNote = new int[CST_NOTE_MAX+1];
-
-        int nTotalReview = reviews.size();
-        if (nTotalReview>0){
-
-            // Use HashMap : Index = RAte (0,1..5) and value = counter review with the associated rate
-            Map<Integer, Integer> map = new HashMap<>();
-            for (Review r : reviews) {
-                int nRate = r.getRate();
-                int nNbReview = 0;
-                if (map.containsKey(nRate)) {
-                    nNbReview = map.get(nRate); // TODO : Pourquoi ce warning : Unboxing of 'map.get(nRate)' may produce 'NullPointerException'
-                }
-                nNbReview++;
-                map.put(nRate,nNbReview);
-            }
-
-            // Copy in an array of int
-            for (int i = 0; i<=CST_NOTE_MAX; i++){
-                if (map.containsKey(i)){
-                    int nNbReview = map.get(i); // TODO : Pourquoi ce warning : Unboxing of 'map.get(nRate)' may produce 'NullPointerException'
-                    anPercentPerNote[i] = nNbReview *100 / nTotalReview ;
-                }
-            }
-
-
-        }
-
-        oPercentPerNote.postValue(anPercentPerNote);
-
-    }
 }

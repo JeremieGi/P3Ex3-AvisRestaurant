@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/jakarta_bold"
-            android:text="3.5"
+            android:text="x.x"
             android:textSize="24dp"
             app:layout_constraintStart_toStartOf="@id/tvRestaurantName"
             app:layout_constraintEnd_toEndOf="@id/tvRestaurantName"
@@ -85,7 +85,7 @@
             app:layout_constraintEnd_toEndOf="@id/tvReviewsAverage"
             app:layout_constraintStart_toStartOf="@id/tvReviewsAverage"
             app:layout_constraintTop_toBottomOf="@id/rbReviewsAverage"
-            android:text="(200)"
+            android:text="(xxx)"
             />
 
         <ProgressBar
@@ -158,7 +158,7 @@
 
         <Button
             android:id="@+id/button_AddReview"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:text="@string/add_a_review"
@@ -166,6 +166,7 @@
             android:fontFamily="@font/jakarta_regular"
             app:layout_constraintEnd_toEndOf="@+id/progressbar_Rate1"
             app:layout_constraintTop_toBottomOf="@id/progressbar_Rate1"
+            android:gravity="right"
             />
 
         <com.google.android.material.chip.ChipGroup

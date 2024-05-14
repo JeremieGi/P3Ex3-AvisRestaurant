@@ -66,14 +66,11 @@
             android:layout_width="60dp"
             android:layout_height="12dp"
             android:isIndicator="true"
-            android:numStars="5"
             android:rating="3.5"
             app:layout_constraintEnd_toEndOf="@id/tvReviewsAverage"
             app:layout_constraintStart_toStartOf="@id/tvReviewsAverage"
             app:layout_constraintTop_toBottomOf="@id/tvReviewsAverage"
             style="@style/foodRatingBar" />
-        <!-- TODO : Voir Denis
-        Le point car j'ai importé le png depuis figma + créer un fichierratingstar.xml que j'appelle depuis un style.-->
 
         <TextView
             android:id="@+id/tvReviewsCount"
@@ -155,13 +152,14 @@
             app:layout_constraintStart_toStartOf="@id/progressbar_Rate2"
             app:layout_constraintTop_toBottomOf="@id/progressbar_Rate2" />
 
-
+        <!-- #TODO : Pourquoi je n'arrive pas à réduire la hauteur du bouton sans tronquer le texte -->
         <Button
             android:id="@+id/button_AddReview"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:text="@string/add_a_review"
+            android:textSize="10sp"
             android:textColor="@color/black"
             android:fontFamily="@font/jakarta_regular"
             app:layout_constraintEnd_toEndOf="@+id/progressbar_Rate1"

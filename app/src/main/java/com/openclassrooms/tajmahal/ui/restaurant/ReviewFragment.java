@@ -1,5 +1,6 @@
 package com.openclassrooms.tajmahal.ui.restaurant;
 
+
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -12,9 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.openclassrooms.tajmahal.R;
-import com.openclassrooms.tajmahal.databinding.FragmentDetailsBinding;
 import com.openclassrooms.tajmahal.databinding.FragmentReviewBinding;
+import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
 import java.util.List;
@@ -81,8 +81,26 @@ public class ReviewFragment extends Fragment {
         // OBSERVERS
 
         // Observes changes in the restaurant data and updates the UI accordingly.
+        mViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant);
+
+        // Observes changes in the reviews data and updates the UI accordingly.
         mViewModel.getTajMahalReviews().observe(requireActivity(), this::updateUIWithReviews);
 
+
+        // LISTENERS
+
+        // Button back of toolbar
+        binding.toolbarReview.toolbar.setNavigationOnClickListener(view1 ->
+                requireActivity().getSupportFragmentManager().popBackStack()
+        );
+    }
+
+    /**
+     * Display restaurant name in the Action Bar information
+     * @param restaurant
+     */
+    private void updateUIWithRestaurant(Restaurant restaurant) {
+        binding.toolbarReview.toolbar.setTitle(restaurant.getName());
 
     }
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.openclassrooms.tajmahal.data.repository.RestaurantRepository;
+import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
 import java.util.List;
@@ -35,6 +36,13 @@ public class ReviewViewModel extends ViewModel {
         return restaurantRepository.getReviews();
     }
 
-
+    /**
+     * Fetches the details of the Taj Mahal restaurant.
+     *
+     * @return LiveData object containing the details of the Taj Mahal restaurant.
+     */
+    public LiveData<Restaurant> getTajMahalRestaurant() {
+        return restaurantRepository.getRestaurant();
+    }
 
 }

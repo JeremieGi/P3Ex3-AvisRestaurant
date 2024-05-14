@@ -22,6 +22,8 @@
     <string name="icone_website">Icone website</string>
     <string name="phone_icon">Phone icon</string>
     <string name="add_a_review">Add a review</string>
+    <string name="user_avatar">User avatar</string>
+    <string name="validate">Validate</string>
 
 
 </resources>

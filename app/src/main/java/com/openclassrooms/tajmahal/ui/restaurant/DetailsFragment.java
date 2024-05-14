@@ -117,8 +117,9 @@ public class DetailsFragment extends Fragment {
        ReviewFragment reviewFragment = ReviewFragment.newInstance();
        FragmentManager fragmentManager = getParentFragmentManager();
        FragmentTransaction fragmentTransaction = fragmentManager
-                .beginTransaction();
-       fragmentTransaction.replace(R.id.container, reviewFragment).commit();
+                .beginTransaction()
+                .addToBackStack(null); // Used by the back button in toolbar
+       fragmentTransaction.add(R.id.container, reviewFragment).commit();
     }
 
 

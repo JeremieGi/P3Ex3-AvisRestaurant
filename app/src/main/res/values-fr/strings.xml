@@ -24,5 +24,6 @@
     <string name="add_a_review">Laisser un avis</string>
     <string name="user_avatar">Avatar de l\'utilisateur</string>
     <string name="validate">Valider</string>
+    <string name="share_here_your_experience">Partagez ici les details de votre expérience</string>
 
 </resources>

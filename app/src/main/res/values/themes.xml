@@ -6,20 +6,11 @@
     </style>
 
     <style name="Theme.TajMahal" parent="Base.Theme.TajMahal" >
-
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="android:splashScreenTheme" tools:targetApi="s">@drawable/splash_background</item>
         <item name="android:statusBarColor">@color/red</item>
     </style>
 
-    <!-- RatingBar -->
-    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
-        <item name="android:progressDrawable">@drawable/ratingstars</item>
-        <item name="android:minHeight">20dp</item>
-        <item name="android:maxHeight">20dp</item>
-        <item name="android:numStars">5</item>
-        <item name="android:stepSize">1</item> <!-- Espacement entre les étoiles (en unités de l'échelle de notation) -->
-    </style>
 
     <!-- ProgessBar -->
     <style name="CustomProgressBarStyle" parent="Widget.AppCompat.ProgressBar.Horizontal">

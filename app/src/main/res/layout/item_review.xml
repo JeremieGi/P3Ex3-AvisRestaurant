@@ -44,19 +44,26 @@
 
     <RatingBar
         android:id="@+id/item_review_rbUserNote"
-        style="@style/foodRatingBar"
-        android:layout_width="0dp"
-        android:layout_height="12dp"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:stepSize="1"
+        android:scaleX="1.1"
+        android:scaleY="1.1"
+        android:rating="1"
+        android:progressTint="@color/yellowStar"
+        android:backgroundTint="@color/borderdadada"
         app:layout_constraintStart_toStartOf="@id/item_review_tvUserName"
-        app:layout_constraintBottom_toBottomOf="@id/item_review_imgUser" />
-    <!-- TODO : Image de l étoile importée à partir de Figma
-        + je ne respecte pas la taille des étoiles de la maquette, ni les espacements
-        -->
+        app:layout_constraintBottom_toBottomOf="@id/item_review_imgUser" />/>
+
+
 
     <TextView
         android:id="@+id/item_review_comment"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="5dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +73,7 @@
         android:fontFamily="@font/jakarta_semibold"
         android:textColor="@color/lightgrey"
         android:textSize="12sp"
+
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

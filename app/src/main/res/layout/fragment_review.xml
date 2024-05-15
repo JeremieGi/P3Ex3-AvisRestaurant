@@ -48,22 +48,25 @@
 
         <RatingBar
             android:id="@+id/fragment_review_rbUserNote"
-            style="@style/foodRatingBar"
-            android:layout_height="12dp"
+            style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="false"
+            android:numStars="5"
             android:stepSize="1"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
+            android:progressTint="@color/yellowStar"
+            android:backgroundTint="@color/borderdadada"
             app:layout_constraintStart_toStartOf="@id/fragment_review_tvUserName"
-            app:layout_constraintBottom_toBottomOf="@id/fragment_review_imgUser" />
+            app:layout_constraintBottom_toBottomOf="@id/fragment_review_imgUser" />/>
 
-        <!-- TODO : Image de l étoile importée à partir de Figma
-            + si j'agrandis le champs celà ajoute des étoiles
-            + je ne respecte pas la taille des étoiles de la maquette
-            -->
+
 
         <Button
             android:id="@+id/fragment_review_buttonValideReview"
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_height="34dp"
             android:layout_marginEnd="20dp"
             android:backgroundTint="#CF2F2F"
             android:text="@string/validate"
@@ -72,6 +75,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/fragment_review_imgUser" />
 
+        <!-- maxLines semble ignoré : je peux saisir plus de 3 lignes
+            maxLength est bien respecté -->
         <EditText
             android:id="@+id/fragment_review_edtComment"
             android:layout_width="0dp"
@@ -89,6 +94,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_review_imgUser"
             android:maxLines="3"
+            android:maxLength="500"
             android:gravity="top|start"
             />
 

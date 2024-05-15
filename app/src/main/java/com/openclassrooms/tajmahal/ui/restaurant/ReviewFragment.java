@@ -157,7 +157,8 @@ public class ReviewFragment extends Fragment {
 
         }else{
             // Toast message
-            Toast toast = Toast.makeText(getContext(), sErrorMessage, Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(requireContext(), sErrorMessage, Toast.LENGTH_LONG);
+            // TODO : Toast s'affiche toujours en bas
             toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
         }

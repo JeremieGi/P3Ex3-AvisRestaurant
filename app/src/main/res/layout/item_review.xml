@@ -16,14 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/item_review_imgUser"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
+        android:src="@drawable/avatarpreview"/>
 
     <TextView
         android:id="@+id/item_review_tvUserName"

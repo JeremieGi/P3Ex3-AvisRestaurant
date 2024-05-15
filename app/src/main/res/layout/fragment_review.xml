@@ -19,14 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/fragment_review_imgUser"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_review_toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_review_toolbar"
+            android:src="@drawable/avatarpreview"
+            app:shapeAppearanceOverlay="@style/roundedImageView"
+            />
 
         <TextView
             android:id="@+id/fragment_review_tvUserName"

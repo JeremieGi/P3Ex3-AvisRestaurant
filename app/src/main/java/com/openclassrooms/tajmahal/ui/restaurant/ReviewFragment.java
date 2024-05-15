@@ -19,6 +19,7 @@ import com.openclassrooms.tajmahal.databinding.FragmentReviewBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 import com.openclassrooms.tajmahal.ui.adapter.ReviewAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -100,6 +101,8 @@ public class ReviewFragment extends Fragment {
         // Observes changes in the reviews data and updates the UI accordingly.
         mViewModel.getTajMahalReviews().observe(requireActivity(), this::updateUIWithReviews);
 
+        mViewModel.getUserName().observe(requireActivity(), this::updateCurrentUser);
+        mViewModel.getUserPicture().observe(requireActivity(), this::updateUserPicture);
 
         // LISTENERS
 
@@ -111,6 +114,14 @@ public class ReviewFragment extends Fragment {
 
     }
 
+    private void updateUserPicture(String sURL) {
+        // Picasso : A powerful image downloading and caching library for Android.
+        Picasso.get().load(sURL).into(binding.fragmentReviewImgUser);
+    }
+
+    private void updateCurrentUser(String sUserP) {
+        binding.fragmentReviewTvUserName.setText(sUserP);
+    }
 
 
     /**

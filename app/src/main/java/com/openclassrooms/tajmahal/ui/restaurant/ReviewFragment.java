@@ -3,7 +3,6 @@ package com.openclassrooms.tajmahal.ui.restaurant;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;

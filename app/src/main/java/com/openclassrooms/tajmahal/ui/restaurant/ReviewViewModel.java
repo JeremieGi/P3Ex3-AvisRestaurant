@@ -35,18 +35,12 @@ public class ReviewViewModel extends ViewModel {
     }
 
     /**
-     * List all the reviews
-     *
-     * @return LiveData object containing the reviews.
+     * Init all the reviews from the repository
      */
     public void initTajMahalReviews() {
         // Transform LiveData in MutableLiveData
         LiveData<List<Review>> livedata = restaurantRepository.getReviews();
         aListReviews = new MutableLiveData<>(livedata.getValue()) ;
-    }
-
-    public LiveData<List<Review>> getReviews(){
-        return aListReviews;
     }
 
 
@@ -59,6 +53,10 @@ public class ReviewViewModel extends ViewModel {
         return restaurantRepository.getRestaurant();
     }
 
+    /**
+     * Get user name in repository and notify the view
+     * @return : user name
+     */
     public LiveData<String> getUserName() {
 
         MutableLiveData currentUser = new MutableLiveData<>();
@@ -67,6 +65,10 @@ public class ReviewViewModel extends ViewModel {
 
     }
 
+    /**
+     * Get user avatar in repository and notify the view
+     * @return : user avatar
+     */
     public LiveData<String> getUserPicture() {
 
         MutableLiveData imgUser = new MutableLiveData<>();
@@ -75,6 +77,10 @@ public class ReviewViewModel extends ViewModel {
 
     }
 
+    /**
+     * Add review and notify the view
+     * @param oUserReviewP
+     */
     public void addReview(Review oUserReviewP) {
 
 

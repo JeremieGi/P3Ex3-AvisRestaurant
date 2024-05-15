@@ -1,10 +1,9 @@
 package com.openclassrooms.tajmahal.data.repository;
 
-import com.openclassrooms.tajmahal.data.service.RestaurantApi;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+/** @noinspection SameReturnValue, SameReturnValue */
 @Singleton
 public class UserRepository {
 

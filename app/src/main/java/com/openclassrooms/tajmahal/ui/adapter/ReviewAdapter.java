@@ -1,15 +1,11 @@
 package com.openclassrooms.tajmahal.ui.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.ItemReviewBinding;
 import com.openclassrooms.tajmahal.domain.model.Review;
 import com.squareup.picasso.Picasso;
@@ -60,6 +56,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+        // #TODO : Warning : It will always be more efficient to use more specific change events if you can. Rely on 'notifyDataSetChanged' as a last resort.
         notifyDataSetChanged(); // refresh the recycler view
     }
 

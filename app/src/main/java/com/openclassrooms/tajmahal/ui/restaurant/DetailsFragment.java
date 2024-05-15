@@ -178,7 +178,7 @@ public class DetailsFragment extends Fragment {
 
         binding.tvReviewsAverage.setText(sAvg);
 
-        float fNote = (float) (rAverage.floatValue());
+        float fNote = rAverage.floatValue();
         binding.rbReviewsAverage.setRating(fNote);
 
     }

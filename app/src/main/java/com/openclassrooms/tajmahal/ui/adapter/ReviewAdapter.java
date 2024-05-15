@@ -10,9 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.openclassrooms.tajmahal.R;
+import com.openclassrooms.tajmahal.databinding.ItemReviewBinding;
 import com.openclassrooms.tajmahal.domain.model.Review;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder> {
 
@@ -21,20 +24,30 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
 
 
-    // Create new views (invoked by the layout manager)
+    // Create new views (invoked by the layout manager) and call ReviewViewHolder
     @NonNull
     @Override
     public ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater adapterLayout = LayoutInflater.from(parent.getContext());
-        View view = adapterLayout.inflate(R.layout.item_review, parent, false);
-        return new ReviewViewHolder(view);
+//        View view = adapterLayout.inflate(R.layout.item_review, parent, false);
+//        return new ReviewViewHolder(view);
+        ItemReviewBinding binding = ItemReviewBinding.inflate(adapterLayout, parent, false);
+        return new ReviewViewHolder(binding);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
+
         Review itemReview = reviews.get(position);
-        holder.tvComment.setText(itemReview.getComment());
+
+        // Picasso : A powerful image downloading and caching library for Android.
+        Picasso.get().load(itemReview.getPicture()).into(holder.itemBinding.itemReviewImgUser);
+
+        holder.itemBinding.itemReviewTvUserName.setText(itemReview.getUsername());
+        holder.itemBinding.itemReviewRbUserNote.setRating(itemReview.getRate());
+        holder.itemBinding.itemReviewComment.setText(itemReview.getComment());
+
     }
 
     /**
@@ -47,17 +60,17 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
-        notifyDataSetChanged();
+        notifyDataSetChanged(); // refresh the recycler view
     }
 
     public static class ReviewViewHolder extends RecyclerView.ViewHolder {
 
-        // TODO : Binding possible ici ?
-        TextView tvComment;
+        // Binding in ViewHolder
+        public ItemReviewBinding itemBinding;
 
-        ReviewViewHolder(View itemViewP) {
-            super(itemViewP);
-            tvComment = itemView.findViewById(R.id.item_review_comment);
+        ReviewViewHolder(ItemReviewBinding itemBinding) {
+            super(itemBinding.getRoot());
+            this.itemBinding = itemBinding;
         }
     }
 }

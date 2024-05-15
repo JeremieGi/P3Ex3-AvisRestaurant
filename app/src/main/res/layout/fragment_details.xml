@@ -30,7 +30,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/jakarta_regular"
-            android:textColor="#666666"
+            android:textColor="@color/lightgrey"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/jakarta_bold"
             android:text="x.x"
-            android:textSize="24dp"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="@id/tvRestaurantName"
             app:layout_constraintEnd_toEndOf="@id/tvRestaurantName"
             app:layout_constraintTop_toBottomOf="@id/image"
@@ -76,20 +76,23 @@
             android:id="@+id/tvReviewsCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:fontFamily="@font/jakarta_regular"
-            android:textColor="#666666"
+            android:textColor="@color/lightgrey"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@id/tvReviewsAverage"
             app:layout_constraintStart_toStartOf="@id/tvReviewsAverage"
             app:layout_constraintTop_toBottomOf="@id/rbReviewsAverage"
-            android:text="(xxx)"
+            tools:text="(xxx)"
             />
 
         <ProgressBar
             android:id="@+id/progressbar_Rate5"
             style="@style/CustomProgressBarStyle"
             android:layout_height="@dimen/progressbar_height"
-            android:layout_width="@dimen/progressbar_width"
+            android:layout_width="0dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="20dp"
             android:isIndicator="true"
             android:progress="25"
             app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +103,7 @@
             android:id="@+id/progressbar_Rate4"
             style="@style/CustomProgressBarStyle"
             android:layout_height="@dimen/progressbar_height"
-            android:layout_width="@dimen/progressbar_width"
+            android:layout_width="0dp"
             android:isIndicator="true"
             android:progress="25"
             android:layout_marginTop="@dimen/marge_between_progressbar"
@@ -108,19 +111,12 @@
             app:layout_constraintStart_toStartOf="@id/progressbar_Rate5"
             app:layout_constraintTop_toBottomOf="@id/progressbar_Rate5" />
 
-        <!-- 	TODO avec Denis
-            dANS @+id/progressbar_Rate5? REMPLACER android:layout_width="@dimen/progressbar_width"
-			Par
-			android:layout_marginStart="30dp"
-			android:layout_marginEnd="20dp"
-			=> Erreur à l'exec You must supply a layout_width attribute.
-           -->
 
         <ProgressBar
             android:id="@+id/progressbar_Rate3"
             style="@style/CustomProgressBarStyle"
             android:layout_height="@dimen/progressbar_height"
-            android:layout_width="@dimen/progressbar_width"
+            android:layout_width="0dp"
             android:isIndicator="true"
             android:progress="25"
             android:layout_marginTop="@dimen/marge_between_progressbar"
@@ -132,7 +128,7 @@
             android:id="@+id/progressbar_Rate2"
             style="@style/CustomProgressBarStyle"
             android:layout_height="@dimen/progressbar_height"
-            android:layout_width="@dimen/progressbar_width"
+            android:layout_width="0dp"
             android:isIndicator="true"
             android:progress="25"
             android:layout_marginTop="@dimen/marge_between_progressbar"
@@ -144,7 +140,7 @@
             android:id="@+id/progressbar_Rate1"
             style="@style/CustomProgressBarStyle"
             android:layout_height="@dimen/progressbar_height"
-            android:layout_width="@dimen/progressbar_width"
+            android:layout_width="0dp"
             android:isIndicator="true"
             android:progress="25"
             android:layout_marginTop="@dimen/marge_between_progressbar"
@@ -152,18 +148,27 @@
             app:layout_constraintStart_toStartOf="@id/progressbar_Rate2"
             app:layout_constraintTop_toBottomOf="@id/progressbar_Rate2" />
 
-        <!-- #TODO : Pourquoi je n'arrive pas à réduire la hauteur du bouton sans tronquer le texte -->
+        <!-- #TODO : Bouton ci-dessous : Je suis obligé d'utiliser minHeight / maxHeight réduire la hauteur du bouton sans tronquer le texte
+           Comment connaître le style appliqué par défaut (fond violet)-->
+
         <Button
             android:id="@+id/button_AddReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
             android:text="@string/add_a_review"
             android:textSize="10sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/jakarta_regular"
+            android:fontFamily="@font/jakarta_bold"
             app:layout_constraintEnd_toEndOf="@+id/progressbar_Rate1"
-            app:layout_constraintTop_toBottomOf="@id/progressbar_Rate1"
+            app:layout_constraintTop_toTopOf="@id/tvReviewsCount"
+            android:minHeight="25dp"
+            android:maxHeight="25dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:textColor="@color/lightgrey"
+            android:backgroundTint="@color/white"
+            android:textAlignment="textEnd"
             />
 
         <com.google.android.material.chip.ChipGroup
@@ -210,13 +215,13 @@
             android:layout_width="0dp"
             android:layout_height="0.75dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="10dp"
 
-            android:background="#DADADA"
+            android:background="@color/borderdadada"
             app:layout_constraintBottom_toTopOf="@+id/tvRestaurantHours"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvRestaurantName" />
+            app:layout_constraintTop_toBottomOf="@id/tvReviewsCount" />
 
         <ImageView
             android:id="@+id/icon_hours"

@@ -12,18 +12,22 @@
         <item name="android:statusBarColor">@color/red</item>
     </style>
 
+    <!-- RatingBar -->
     <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingstars</item>
         <item name="android:minHeight">20dp</item>
         <item name="android:maxHeight">20dp</item>
         <item name="android:numStars">5</item>
+        <item name="android:stepSize">1</item> <!-- Espacement entre les étoiles (en unités de l'échelle de notation) -->
     </style>
 
+    <!-- ProgessBar -->
     <style name="CustomProgressBarStyle" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressTint">#FFB800</item>
         <item name="android:backgroundTint">#DADADA</item>
     </style>
-    
+
+    <!-- rounded ImageView -->
     <style name="roundedImageView" >
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>

@@ -35,11 +35,11 @@
             android:id="@+id/fragment_review_tvUserName"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="10dp"
             android:contentDescription="@string/user_avatar"
             android:fontFamily="@font/jakarta_semibold"
-            android:text="User name"
-            android:textColor="#666"
+            tools:text="User name"
+            android:textColor="@color/lightgrey"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/fragment_review_imgUser"
             app:layout_constraintTop_toTopOf="@+id/fragment_review_imgUser"
@@ -49,13 +49,14 @@
         <RatingBar
             android:id="@+id/fragment_review_rbUserNote"
             style="@style/foodRatingBar"
-            android:layout_width="0dp"
             android:layout_height="12dp"
+            android:layout_width="wrap_content"
             android:stepSize="1"
             app:layout_constraintStart_toStartOf="@id/fragment_review_tvUserName"
-            app:layout_constraintTop_toBottomOf="@id/fragment_review_tvUserName" />
+            app:layout_constraintBottom_toBottomOf="@id/fragment_review_imgUser" />
 
-        <!-- TODO : Image de l étoile importé à partir de Figma
+        <!-- TODO : Image de l étoile importée à partir de Figma
+            + si j'agrandis le champs celà ajoute des étoiles
             + je ne respecte pas la taille des étoiles de la maquette
             -->
 
@@ -67,7 +68,7 @@
             android:backgroundTint="#CF2F2F"
             android:text="@string/validate"
             android:textColor="@color/white"
-            android:textSize="10sp"
+            android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/fragment_review_imgUser" />
 
@@ -76,17 +77,20 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/edittextborder"
             android:hint="@string/share_here_your_experience"
             android:inputType="textMultiLine"
             android:padding="10dp"
-            android:textColor="#DADADA"
-            android:textColorHint="#DADADA"
-            android:textSize="10dp"
+            android:textColor="@color/borderdadada"
+            android:textColorHint="@color/borderdadada"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_review_imgUser" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_review_imgUser"
+            android:maxLines="3"
+            android:gravity="top|start"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_review_recyclerview"

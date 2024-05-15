@@ -11,10 +11,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.FragmentReviewBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
@@ -33,6 +36,9 @@ public class ReviewFragment extends Fragment {
     private ReviewViewModel mViewModel;
 
     private ReviewAdapter reviewAdapter;
+
+    private String sUserName;
+    private String sURLUserAvatar;
 
     public static ReviewFragment newInstance() {
         return new ReviewFragment();
@@ -91,7 +97,7 @@ public class ReviewFragment extends Fragment {
         //binding.fragmentReviewRecyclerview.setHasFixedSize(true);
         reviewAdapter = new ReviewAdapter();
         binding.fragmentReviewRecyclerview.setAdapter(reviewAdapter);
-
+        mViewModel.initTajMahalReviews(); // Call API
 
         // OBSERVERS
 
@@ -99,7 +105,7 @@ public class ReviewFragment extends Fragment {
         mViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant);
 
         // Observes changes in the reviews data and updates the UI accordingly.
-        mViewModel.getTajMahalReviews().observe(requireActivity(), this::updateUIWithReviews);
+        mViewModel.aListReviews.observe(requireActivity(), this::updateUIWithReviews);
 
         mViewModel.getUserName().observe(requireActivity(), this::updateCurrentUser);
         mViewModel.getUserPicture().observe(requireActivity(), this::updateUserPicture);
@@ -111,15 +117,71 @@ public class ReviewFragment extends Fragment {
                 requireActivity().getSupportFragmentManager().popBackStack()
         );
 
+        // Button 'Validate'
+        binding.fragmentReviewButtonValideReview.setOnClickListener(view1 ->
+                addReview()
+        );
+
 
     }
 
+    /**
+     * Add the current user review
+     */
+    private void addReview() {
+
+        // Check required fields
+        String sErrorMessage = "";
+
+
+        // Note
+        int nRate = (int) binding.fragmentReviewRbUserNote.getRating();
+        if (nRate==0){
+            sErrorMessage = getString(R.string.Please_rate_the_restaurant);
+        }
+
+        // Comment
+        String sComment = binding.fragmentReviewEdtComment.getText().toString();
+        if (sComment.isEmpty()){
+            sErrorMessage += '\n' + getString(R.string.Please_enter_a_comment);
+        }
+
+        // required fields ok
+        if (sErrorMessage.isEmpty()){
+            Review oUserReview = new Review(this.sUserName,this.sURLUserAvatar,sComment,nRate);
+            mViewModel.addReview(oUserReview);
+
+            // Interdit la modification des champs pour ne pas saisir un 2ème avis
+            binding.fragmentReviewRbUserNote.setEnabled(false);
+            binding.fragmentReviewEdtComment.setEnabled(false);
+            binding.fragmentReviewButtonValideReview.setEnabled(false);
+
+        }else{
+            // Toast message
+            Toast toast = Toast.makeText(getContext(), sErrorMessage, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+
+
+    }
+
+    /**
+     * Display the user avatar
+     * @param sURL : URL of picture to display
+     */
     private void updateUserPicture(String sURL) {
+        this.sURLUserAvatar = sURL;
         // Picasso : A powerful image downloading and caching library for Android.
         Picasso.get().load(sURL).into(binding.fragmentReviewImgUser);
     }
 
+    /**
+     * Display current user name
+     * @param sUserP : name to display
+     */
     private void updateCurrentUser(String sUserP) {
+        this.sUserName = sUserP;
         binding.fragmentReviewTvUserName.setText(sUserP);
     }
 
@@ -137,9 +199,8 @@ public class ReviewFragment extends Fragment {
      * @param reviews : reviews
      */
     private void updateUIWithReviews(List<Review> reviews) {
-
+        // Refresh the recyclerView
         reviewAdapter.setReviews(reviews);
-
     }
 
     /**

@@ -25,5 +25,7 @@
     <string name="user_avatar">Avatar de l\'utilisateur</string>
     <string name="validate">Valider</string>
     <string name="share_here_your_experience">Partagez ici les details de votre expérience</string>
+    <string name="Please_enter_a_comment">"Merci de saisir un commentaire"</string>
+    <string name="Please_rate_the_restaurant">Veuillez noter le restaurant</string>
 
 </resources>

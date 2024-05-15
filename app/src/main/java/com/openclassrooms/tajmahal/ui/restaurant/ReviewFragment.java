@@ -154,7 +154,7 @@ public class ReviewFragment extends Fragment {
             // Interdit la modification des champs pour ne pas saisir un 2ème avis
             binding.fragmentReviewRbUserNote.setEnabled(false);
             binding.fragmentReviewEdtComment.setEnabled(false);
-            binding.fragmentReviewButtonValideReview.setEnabled(false);
+            binding.fragmentReviewButtonValideReview.setVisibility(View.INVISIBLE);
 
         }else{
             // Toast message

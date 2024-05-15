@@ -59,7 +59,7 @@ public class ReviewViewModel extends ViewModel {
      */
     public LiveData<String> getUserName() {
 
-        MutableLiveData currentUser = new MutableLiveData<>();
+        MutableLiveData<String> currentUser = new MutableLiveData<String>();
         currentUser.setValue(userRepository.getUserName());
         return currentUser;
 
@@ -71,7 +71,7 @@ public class ReviewViewModel extends ViewModel {
      */
     public LiveData<String> getUserPicture() {
 
-        MutableLiveData imgUser = new MutableLiveData<>();
+        MutableLiveData<String> imgUser = new MutableLiveData<String>();
         imgUser.setValue(userRepository.getUserPicture());
         return imgUser;
 
@@ -79,7 +79,7 @@ public class ReviewViewModel extends ViewModel {
 
     /**
      * Add review and notify the view
-     * @param oUserReviewP
+     * @param oUserReviewP : Review too add
      */
     public void addReview(Review oUserReviewP) {
 

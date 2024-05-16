@@ -1,5 +1,6 @@
 package com.openclassrooms.tajmahal.ui.restaurant;
 
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -96,9 +97,8 @@ public class DetailsFragment extends Fragment {
         detailsViewModel.oPercentPerNote.observe(requireActivity(), this::displayPercentPerNote);
 
         // Calculate averages
-        detailsViewModel.calculateReviewsAverage();
-        detailsViewModel.calculateReviewsTotal();
-        detailsViewModel.calculateReviewsRepartition();
+        detailsViewModel.CalculateReviewsStat();
+
 
 
         // LISTENER
@@ -109,6 +109,7 @@ public class DetailsFragment extends Fragment {
 
 
     }
+
 
     /**
      * open fragment to add a new review or see all reviews
@@ -121,6 +122,7 @@ public class DetailsFragment extends Fragment {
                 .addToBackStack(null); // Used by the back button in toolbar
        fragmentTransaction.add(R.id.container, reviewFragment).commit();
     }
+
 
 
     /**
@@ -204,7 +206,7 @@ public class DetailsFragment extends Fragment {
 
             switch (nRate){
                 case 0 :
-                    // Vu avec Denis : Pas de note à 0
+                    // Note 0 is not possible (confirm by mentor)
                     break;
                 case 1 :
                     binding.progressbarRate1.setProgress(anRateP[nRate]);
@@ -284,4 +286,12 @@ public class DetailsFragment extends Fragment {
         return new DetailsFragment();
     }
 
+
+    // TODO : Pas possible de faire plus simple que d'observer les changements du FragmentManager ?
+    /** This method is called when the fragment is displayed by the fragment Manager
+     *  see code in the activity */
+    public void onChildFragmentClosed() {
+        // Update stat data (average, count...)
+        detailsViewModel.CalculateReviewsStat();
+    }
 }

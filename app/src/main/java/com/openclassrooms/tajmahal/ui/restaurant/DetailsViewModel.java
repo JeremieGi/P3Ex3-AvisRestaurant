@@ -116,6 +116,10 @@ public class DetailsViewModel extends ViewModel {
         return dayString;
     }
 
+    /**
+     * Calculate the reviews repartition by rate (0,1...5)
+     *  in percentage (value 0 .. 100)
+     */
     public void calculateReviewsRepartition() {
         if (this.restaurantRepository!=null){
             int[] anRepartition = restaurantRepository.getReviewsRepartition();
@@ -123,4 +127,12 @@ public class DetailsViewModel extends ViewModel {
         }
     }
 
+    /**
+     * Update stat data of restaurant
+     */
+    public void CalculateReviewsStat() {
+        calculateReviewsAverage();
+        calculateReviewsTotal();
+        calculateReviewsRepartition();
+    }
 }

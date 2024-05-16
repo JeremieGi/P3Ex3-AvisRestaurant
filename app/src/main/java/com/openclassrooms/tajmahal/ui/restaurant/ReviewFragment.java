@@ -132,31 +132,24 @@ public class ReviewFragment extends Fragment {
      */
     private void addReview() {
 
-        // Check required fields
-        String sErrorMessage = "";
-
-
         // Note
         int nRate = (int) binding.fragmentReviewRbUserNote.getRating();
-        if (nRate==0){
-            sErrorMessage = getString(R.string.Please_rate_the_restaurant);
-        }
-
         // Comment
         String sComment = binding.fragmentReviewEdtComment.getText().toString();
-        if (sComment.isEmpty()){
-            sErrorMessage += '\n' + getString(R.string.Please_enter_a_comment);
-        }
+
+        Review oUserReview = new Review(this.sUserName,this.sURLUserAvatar,sComment,nRate);
+
+        // Check required fields
+        int nErrorCode = mViewModel.addReview(oUserReview);
 
         // required fields ok
-        if (sErrorMessage.isEmpty()){
-            Review oUserReview = new Review(this.sUserName,this.sURLUserAvatar,sComment,nRate);
-            mViewModel.addReview(oUserReview);
-
+        if (nErrorCode==0){
             //disableReviewEntry(); // Will be call in updateUIWithReviews
-
-
         }else{
+
+            // TODO : Le repository renvoie un code erreur et j'affiche les messages depuis le fragment pour avoir accès au ressource et conserver les couches indépendantes
+            String sErrorMessage = getExplicitMessage(nErrorCode);
+
             // Toast message
             Toast toast = Toast.makeText(requireContext(), sErrorMessage, Toast.LENGTH_LONG);
             // TODO : Toast s'affiche toujours en bas
@@ -164,6 +157,21 @@ public class ReviewFragment extends Fragment {
             toast.show();
         }
 
+
+    }
+
+    public String getExplicitMessage(int nErrorCode) {
+
+        if (nErrorCode==mViewModel.get_error_review_with_no_rate()){
+            return getString(R.string.Please_rate_the_restaurant);
+        }
+
+        if (nErrorCode==mViewModel.get_error_review_with_no_comment()){
+            return getString(R.string.Please_enter_a_comment);
+        }
+
+
+        return "";
 
     }
 

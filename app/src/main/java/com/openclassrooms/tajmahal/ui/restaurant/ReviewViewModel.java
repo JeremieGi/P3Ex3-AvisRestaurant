@@ -73,15 +73,18 @@ public class ReviewViewModel extends ViewModel {
      * Add review in the repository
      * @param oReviewP : Review to add
      */
-    public void addReview(Review oReviewP) {
+    public int addReview(Review oReviewP) {
 
         // Ajout dans le repository (pour que l'avis reste en mémoire de l'appli)
-        restaurantRepository.addReview(oReviewP);
+        int nCodeError = restaurantRepository.addReview(oReviewP);
 
-        // TODO : A la sortie de cet appel aListReviews est bien modifié
-        //  mais l'observer non appelé, il faut que je l'appelle explicitement : normal ?
-        aListReviews.postValue(aListReviews.getValue());
+        if (nCodeError==0){
+            // TODO : A la sortie de cet appel aListReviews est bien modifié
+            //  mais l'observer non appelé, il faut que je l'appelle explicitement : normal ?
+            aListReviews.postValue(aListReviews.getValue());
+        }
 
+        return nCodeError;
 
     }
 
@@ -92,5 +95,14 @@ public class ReviewViewModel extends ViewModel {
      */
     public Review getUserReviewIfExist(String sUserName) {
         return restaurantRepository.getUserReviewIfExist(sUserName);
+    }
+
+    public int get_error_review_with_no_rate(){
+        return restaurantRepository.get_error_review_with_no_rate();
+    }
+
+
+    public int get_error_review_with_no_comment() {
+        return restaurantRepository.get_error_review_with_no_comment();
     }
 }

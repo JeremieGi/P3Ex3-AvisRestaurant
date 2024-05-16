@@ -28,10 +28,13 @@ import javax.inject.Singleton;
 @Singleton
 public class RestaurantRepository {
 
+
     // The API interface instance that will be used for network requests related to restaurant data.
     private final RestaurantApi restaurantApi;
 
     public final static int CST_NOTE_MAX = 5;
+
+
 
     /**
      * Constructs a new instance of {@link RestaurantRepository} with the given {@link RestaurantApi}.
@@ -140,8 +143,8 @@ public class RestaurantRepository {
      * Add a review
      * @param oReviewP : review to add
      */
-    public void addReview(Review oReviewP) {
-        restaurantApi.addReview(oReviewP);
+    public int addReview(Review oReviewP) {
+        return restaurantApi.addReview(oReviewP);
     }
 
     /**
@@ -151,5 +154,13 @@ public class RestaurantRepository {
      */
     public Review getUserReviewIfExist(String sUserName) {
         return restaurantApi.getUserReviewIfExist(sUserName);
+    }
+
+    public int get_error_review_with_no_rate() {
+        return restaurantApi.CST_ERROR_REVIEW_WITH_NO_RATE;
+    }
+
+    public int get_error_review_with_no_comment() {
+        return restaurantApi.CST_ERROR_REVIEW_WITH_NO_COMMENT;
     }
 }

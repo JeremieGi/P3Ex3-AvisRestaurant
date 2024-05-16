@@ -35,23 +35,20 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Listener of fragment changement in de fragment container
          */
-        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
 
-                // get the current fragment
-                Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+            // get the current fragment
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
 
-                // fragment Détails
-                if (currentFragment.getClass() == DetailsFragment.class){
-                    DetailsFragment fragmentDetail = (DetailsFragment) currentFragment;
-                    if (fragmentDetail != null) {
-                        fragmentDetail.onChildFragmentClosed();
-                    }
+            // fragment Détails
+            if (currentFragment.getClass() == DetailsFragment.class){
+                DetailsFragment fragmentDetail = (DetailsFragment) currentFragment;
+                if (fragmentDetail != null) {
+                    fragmentDetail.onChildFragmentClosed();
                 }
-
-
             }
+
+
         });
 
     }

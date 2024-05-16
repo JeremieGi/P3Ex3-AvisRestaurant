@@ -27,6 +27,10 @@ import java.util.List;
  */
 public interface RestaurantApi {
 
+    public static final int CST_ERROR_REVIEW_WITH_NO_RATE = 1;
+    public static final int CST_ERROR_REVIEW_WITH_NO_COMMENT = 2;
+    public static final int CST_ERROR_REVIEW_WITH_NO_USER = 3;
+
     /**
      * Retrieves the details of a restaurant.
      * <p>
@@ -50,7 +54,7 @@ public interface RestaurantApi {
     List<Review> getReviews();
 
     /** Add a review */
-    void addReview(Review oReviewP);
+    int addReview(Review oReviewP);
 
     /**
      * Test in the user has already give a review

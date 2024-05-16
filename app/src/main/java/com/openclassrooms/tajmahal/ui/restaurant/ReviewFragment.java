@@ -89,26 +89,28 @@ public class ReviewFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        setupViewModel(); // Prepares the ViewModel for the fragment.
+        // Prepares the ViewModel for the fragment.
+        setupViewModel();
 
         // Recycler View
         binding.fragmentReviewRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
-        //binding.fragmentReviewRecyclerview.setHasFixedSize(true);
+        binding.fragmentReviewRecyclerview.setHasFixedSize(true); // TODO : quand le mettre exactement ?
         reviewAdapter = new ReviewAdapter();
         binding.fragmentReviewRecyclerview.setAdapter(reviewAdapter);
-        //mViewModel.initTajMahalReviews(); // Call API
 
         // OBSERVERS
+
+        // User name and avatar
+        mViewModel.getUserName().observe(requireActivity(), this::updateCurrentUser);
+        mViewModel.getUserPicture().observe(requireActivity(), this::updateUserPicture);
 
         // Observes changes in the restaurant data and updates the UI accordingly.
         mViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant);
 
         // Observes changes in the reviews data and updates the UI accordingly.
-        //mViewModel.getReviews().observe(requireActivity(), this::updateUIWithReviews);
         mViewModel.aListReviews.observe(requireActivity(), this::updateUIWithReviews);
 
-        mViewModel.getUserName().observe(requireActivity(), this::updateCurrentUser);
-        mViewModel.getUserPicture().observe(requireActivity(), this::updateUserPicture);
+
 
         // LISTENERS
 
@@ -151,10 +153,8 @@ public class ReviewFragment extends Fragment {
             Review oUserReview = new Review(this.sUserName,this.sURLUserAvatar,sComment,nRate);
             mViewModel.addReview(oUserReview);
 
-            // Interdit la modification des champs pour ne pas saisir un 2ème avis
-            binding.fragmentReviewRbUserNote.setEnabled(false);
-            binding.fragmentReviewEdtComment.setEnabled(false);
-            binding.fragmentReviewButtonValideReview.setVisibility(View.INVISIBLE);
+            //disableReviewEntry(); // Will be call in updateUIWithReviews
+
 
         }else{
             // Toast message
@@ -165,6 +165,21 @@ public class ReviewFragment extends Fragment {
         }
 
 
+    }
+
+    /**
+     * Display the user review in field prohibits the entry of a new review
+     * @param review : user review
+     */
+    private void disableAndDisplayUserReview(@NonNull Review review) {
+        // Interdit la modification des champs pour ne pas saisir un 2ème avis
+        binding.fragmentReviewRbUserNote.setEnabled(false);
+        binding.fragmentReviewRbUserNote.setRating(review.getRate());
+
+        binding.fragmentReviewEdtComment.setEnabled(false);
+        binding.fragmentReviewEdtComment.setText(review.getComment());
+
+        binding.fragmentReviewButtonValideReview.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -200,9 +215,18 @@ public class ReviewFragment extends Fragment {
      * @param reviews : reviews
      */
     private void updateUIWithReviews(List<Review> reviews) {
+
         // Refresh the recyclerView
         reviewAdapter.setReviews(reviews);
+
+        // if current user is detected in reviews
+        Review rUserReview = mViewModel.getUserReviewIfExist(this.sUserName);
+        if (rUserReview!=null){
+            // Impossible to vote a second time
+            disableAndDisplayUserReview(rUserReview);
+       }
     }
+
 
     /**
      * Initializes the ViewModel for this activity.

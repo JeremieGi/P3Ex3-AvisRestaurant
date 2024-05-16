@@ -50,5 +50,12 @@ public interface RestaurantApi {
     List<Review> getReviews();
 
     /** Add a review */
-    void addReview(Review oUserReviewP);
+    void addReview(Review oReviewP);
+
+    /**
+     * Test in the user has already give a review
+     * @param sUserName :
+     * @return : the user review if the user name is find in review user name, else null
+     */
+    Review getUserReviewIfExist(String sUserName);
 }

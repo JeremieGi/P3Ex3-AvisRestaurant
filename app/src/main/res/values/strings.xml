@@ -27,6 +27,7 @@
     <string name="share_here_your_experience">Share here details of your experience</string>
     <string name="Please_enter_a_comment">"Please enter a comment"</string>
     <string name="Please_rate_the_restaurant">Please rate the restaurant</string>
+    <string name="you_have_already_give_your_opinion">"You have already give your opinion"</string>
 
 
 </resources>

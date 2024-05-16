@@ -136,7 +136,20 @@ public class RestaurantRepository {
     }
 
 
-    public void addReview(Review oUserReviewP) {
-        restaurantApi.addReview(oUserReviewP);
+    /**
+     * Add a review
+     * @param oReviewP : review to add
+     */
+    public void addReview(Review oReviewP) {
+        restaurantApi.addReview(oReviewP);
+    }
+
+    /**
+     * Test in the user has already give a review
+     * @param sUserName :
+     * @return : the user review if the user name is find in review user name, else null
+     */
+    public Review getUserReviewIfExist(String sUserName) {
+        return restaurantApi.getUserReviewIfExist(sUserName);
     }
 }

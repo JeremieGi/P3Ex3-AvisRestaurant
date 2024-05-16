@@ -73,11 +73,28 @@ public class RestaurantFakeApi implements RestaurantApi {
 
     /** Add a review in the API */
     @Override
-    public void addReview(Review oUserReviewP) {
+    public void addReview(Review oReviewP) {
         //  Only in the array reviews
         //  TODO This method will be implemented by Priyanka
-        reviews.add(0,oUserReviewP);
+        reviews.add(0,oReviewP);
         // an entry date/time should be added to the reviews to order them
+    }
+
+    /**
+     * Test in the user has already give a review
+     * @param sUserName :
+     * @return : the user review if the user name is find in review user name, else null
+     */
+    @Override
+    public Review getUserReviewIfExist(String sUserName) {
+
+        for (Review r : this.reviews){
+            if (r.getUsername().equals(sUserName)){
+                return r;
+            }
+        }
+        return null;
+
     }
 
 

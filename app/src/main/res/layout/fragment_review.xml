@@ -46,6 +46,7 @@
 
             />
 
+        <!-- TODO : Je ne suis pas arrivé à factoriser çà dans un style -->
         <RatingBar
             android:id="@+id/fragment_review_rbUserNote"
             style="?android:attr/ratingBarStyleSmall"

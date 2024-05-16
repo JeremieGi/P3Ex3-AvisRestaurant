@@ -23,6 +23,7 @@ public class ReviewViewModel extends ViewModel {
 
     public MutableLiveData<List<Review>> aListReviews;
 
+
     /**
      * Constructor that Hilt will use to create an instance of ReviewViewModel.
      *
@@ -31,16 +32,15 @@ public class ReviewViewModel extends ViewModel {
     @Inject
     public ReviewViewModel(RestaurantRepository restaurantRepository, UserRepository userRepository) {
         this.restaurantRepository = restaurantRepository;
+        aListReviews = restaurantRepository.getReviews();
         this.userRepository = userRepository;
     }
 
     /**
      * Init all the reviews from the repository
      */
-    public void initTajMahalReviews() {
-        // Transform LiveData in MutableLiveData
-        LiveData<List<Review>> livedata = restaurantRepository.getReviews();
-        aListReviews = new MutableLiveData<>(livedata.getValue()) ;
+    public MutableLiveData<List<Review>> getReviews() {
+        return aListReviews;
     }
 
 
@@ -78,29 +78,19 @@ public class ReviewViewModel extends ViewModel {
     }
 
     /**
-     * Add review and notify the view
-     * @param oUserReviewP : Review too add
+     * Add review in the repository
+     * @param oUserReviewP
      */
     public void addReview(Review oUserReviewP) {
 
+        // Ajout dans le repository (pour que l'avis reste en mémoire de l'appli)
+        restaurantRepository.addReview(oUserReviewP);
 
-        List<Review> reviewList = aListReviews.getValue();
-        List<Review> reviewListMutable;
-        if (reviewList == null) {
-            reviewListMutable = new ArrayList<>();
-        }
-        else{
-            reviewListMutable = new ArrayList<>(reviewList); // Pour avoir une copie modifiable sinon le add plante
-        }
-
-
-        //reviewListMutable.add(oUserReviewP); // Par défaut, ajoute à la fin
-
-        // Ajout au début
-        reviewListMutable.add(0,oUserReviewP);
-
-        aListReviews.postValue(reviewListMutable);
+        // TODO : A la sortie de cet appel aListReviews est bien modifié
+        //  mais l'observer non appelé, il faut que je l'appelle explicitement : normal ?
+        aListReviews.postValue(aListReviews.getValue());
 
 
     }
+
 }

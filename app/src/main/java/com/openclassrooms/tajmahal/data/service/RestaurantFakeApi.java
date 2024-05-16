@@ -3,6 +3,7 @@ package com.openclassrooms.tajmahal.data.service;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,13 +30,13 @@ import java.util.List;
  */
 public class RestaurantFakeApi implements RestaurantApi {
 
-    List<Review> reviews = Arrays.asList(
+    List<Review> reviews = new ArrayList<>(Arrays.asList(
             new Review("Ranjit Singh", "https://xsgames.co/randomusers/assets/avatars/male/71.jpg", "Service très rapide et nourriture délicieuse, nous mangeons ici chaque week-end, c'est très rapide et savoureux. Continuez ainsi!", 5),
             new Review("Martyna Siddeswara", "https://xsgames.co/randomusers/assets/avatars/female/31.jpg", "Un service excellent et des plats incroyablement savoureux. Nous sommes vraiment satisfaits de notre expérience au restaurant.", 4),
             new Review("Komala Alanazi", "https://xsgames.co/randomusers/assets/avatars/male/46.jpg", "La cuisine est délicieuse et le service est également excellent. Le propriétaire est très sympathique et veille toujours à ce que votre repas soit satisfaisant. Cet endroit est un choix sûr!", 5),
             new Review("David John", "https://xsgames.co/randomusers/assets/avatars/male/67.jpg", "Les currys manquaient de diversité de saveurs et semblaient tous à base de tomates. Malgré les évaluations élevées que nous avons vues et nos attentes, nous avons été déçus.", 2),
             new Review("Emilie Hood", "https://xsgames.co/randomusers/assets/avatars/female/20.jpg", "Très bon restaurant Indien ! Je recommande.", 4)
-    );
+    ));
 
 
     /**
@@ -70,7 +71,14 @@ public class RestaurantFakeApi implements RestaurantApi {
         return reviews;
     }
 
-
+    /** Add a review in the API */
+    @Override
+    public void addReview(Review oUserReviewP) {
+        //  Only in the array reviews
+        //  TODO This method will be implemented by Priyanka
+        reviews.add(0,oUserReviewP);
+        // an entry date/time should be added to the reviews to order them
+    }
 
 
 }

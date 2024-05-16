@@ -96,7 +96,7 @@ public class ReviewFragment extends Fragment {
         //binding.fragmentReviewRecyclerview.setHasFixedSize(true);
         reviewAdapter = new ReviewAdapter();
         binding.fragmentReviewRecyclerview.setAdapter(reviewAdapter);
-        mViewModel.initTajMahalReviews(); // Call API
+        //mViewModel.initTajMahalReviews(); // Call API
 
         // OBSERVERS
 
@@ -104,6 +104,7 @@ public class ReviewFragment extends Fragment {
         mViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant);
 
         // Observes changes in the reviews data and updates the UI accordingly.
+        //mViewModel.getReviews().observe(requireActivity(), this::updateUIWithReviews);
         mViewModel.aListReviews.observe(requireActivity(), this::updateUIWithReviews);
 
         mViewModel.getUserName().observe(requireActivity(), this::updateCurrentUser);

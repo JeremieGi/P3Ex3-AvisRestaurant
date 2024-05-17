@@ -148,6 +148,7 @@ public class ReviewFragment extends Fragment {
         }else{
 
             // TODO : Le repository renvoie un code erreur et j'affiche les messages depuis le fragment pour avoir accès au ressource et conserver les couches indépendantes
+            // On est obligé d'utiliser des accesseurs pour les codes d'erreurs ? On peut les mettre en globales du projets ou ca va créer des dépendances ?
             String sErrorMessage = getExplicitMessage(nErrorCode);
 
             // Toast message
@@ -160,6 +161,11 @@ public class ReviewFragment extends Fragment {
 
     }
 
+    /**
+     * Transform error code in an understandable message for the user
+     * @param nErrorCode
+     * @return : an understandable message for the user (FR or UK)
+     */
     public String getExplicitMessage(int nErrorCode) {
 
         if (nErrorCode==mViewModel.get_error_review_with_no_rate()){
@@ -169,7 +175,6 @@ public class ReviewFragment extends Fragment {
         if (nErrorCode==mViewModel.get_error_review_with_no_comment()){
             return getString(R.string.Please_enter_a_comment);
         }
-
 
         return "";
 

@@ -142,6 +142,7 @@ public class RestaurantRepository {
     /**
      * Add a review
      * @param oReviewP : review to add
+     * @return : if there is a problem => Error code CST_ERROR_REVIEW_XXX, if everything is ok return 0
      */
     public int addReview(Review oReviewP) {
         return restaurantApi.addReview(oReviewP);
@@ -156,10 +157,12 @@ public class RestaurantRepository {
         return restaurantApi.getUserReviewIfExist(sUserName);
     }
 
+    /** Give the error code => NO RATE */
     public int get_error_review_with_no_rate() {
         return restaurantApi.CST_ERROR_REVIEW_WITH_NO_RATE;
     }
 
+    /** Give the error code => NO COMMENT */
     public int get_error_review_with_no_comment() {
         return restaurantApi.CST_ERROR_REVIEW_WITH_NO_COMMENT;
     }

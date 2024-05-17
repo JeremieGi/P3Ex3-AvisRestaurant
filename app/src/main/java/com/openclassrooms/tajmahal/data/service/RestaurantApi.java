@@ -27,6 +27,7 @@ import java.util.List;
  */
 public interface RestaurantApi {
 
+    // Error codes off AddReview
     public static final int CST_ERROR_REVIEW_WITH_NO_RATE = 1;
     public static final int CST_ERROR_REVIEW_WITH_NO_COMMENT = 2;
     public static final int CST_ERROR_REVIEW_WITH_NO_USER = 3;
@@ -53,12 +54,16 @@ public interface RestaurantApi {
      */
     List<Review> getReviews();
 
-    /** Add a review */
+    /**
+     * Add a review
+     * @param oReviewP : review to add
+     * @return : if there is a problem => Error code CST_ERROR_REVIEW_XXX, if everything is ok return 0
+     */
     int addReview(Review oReviewP);
 
     /**
      * Test in the user has already give a review
-     * @param sUserName :
+     * @param sUserName : user name to check
      * @return : the user review if the user name is find in review user name, else null
      */
     Review getUserReviewIfExist(String sUserName);

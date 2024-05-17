@@ -97,11 +97,12 @@ public class ReviewViewModel extends ViewModel {
         return restaurantRepository.getUserReviewIfExist(sUserName);
     }
 
+    /** Give the error code => NO RATE */
     public int get_error_review_with_no_rate(){
         return restaurantRepository.get_error_review_with_no_rate();
     }
 
-
+    /** Give the error code => NO COMMENT */
     public int get_error_review_with_no_comment() {
         return restaurantRepository.get_error_review_with_no_comment();
     }

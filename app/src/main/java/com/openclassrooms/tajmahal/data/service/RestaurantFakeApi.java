@@ -72,9 +72,11 @@ public class RestaurantFakeApi implements RestaurantApi {
         return reviews;
     }
 
-    /** Add a review in the API
-     *
-      */
+    /**
+     * Add a review
+     * @param oReviewP : review to add
+     * @return : if there is a problem => Error code CST_ERROR_REVIEW_XXX, if everything is ok return 0
+     */
     @Override
     public int addReview(Review oReviewP) {
 

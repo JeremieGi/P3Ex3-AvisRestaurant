@@ -30,9 +30,9 @@ import java.util.List;
 public interface RestaurantApi {
 
     // Error codes off AddReview
-    public static final int CST_ERROR_REVIEW_WITH_NO_RATE = 1;
-    public static final int CST_ERROR_REVIEW_WITH_NO_COMMENT = 2;
-    public static final int CST_ERROR_REVIEW_WITH_NO_USER = 3;
+    final int CST_ERROR_REVIEW_WITH_NO_RATE = 1;
+    final int CST_ERROR_REVIEW_WITH_NO_COMMENT = 2;
+    final int CST_ERROR_REVIEW_WITH_NO_USER = 3;
 
     /**
      * Retrieves the details of a restaurant.

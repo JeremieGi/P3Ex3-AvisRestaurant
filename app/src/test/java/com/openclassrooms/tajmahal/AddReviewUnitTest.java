@@ -41,7 +41,8 @@ public class AddReviewUnitTest {
         RestaurantRepository repoTest = getRepoTestWithFakeAPI();
 
         // 5 reviews in fakeAPI
-        int nNbReviewInFakeAPI = repoTest.getReviews().getValue().size();
+        int nNbReviewInFakeAPI = 0;
+        if (repoTest.getReviews().getValue()!=null) nNbReviewInFakeAPI = repoTest.getReviews().getValue().size();
 
         // Add a review
         String sUserName = "username";
@@ -72,7 +73,8 @@ public class AddReviewUnitTest {
         RestaurantRepository repoTest = getRepoTestWithFakeAPI();
 
         // 5 reviews in fakeAPI
-        int nNbReviewInFakeAPI = repoTest.getReviews().getValue().size();
+        int nNbReviewInFakeAPI = 0;
+        if (repoTest.getReviews().getValue()!=null) nNbReviewInFakeAPI = repoTest.getReviews().getValue().size();
 
         // Add a review
         Review r = new Review("username","http://jg.fr/pict1.jpg","",5);
@@ -97,7 +99,8 @@ public class AddReviewUnitTest {
         RestaurantRepository repoTest = getRepoTestWithFakeAPI();
 
         // 5 reviews in fakeAPI
-        int nNbReviewInFakeAPI = repoTest.getReviews().getValue().size();
+        int nNbReviewInFakeAPI = 0;
+        if (repoTest.getReviews().getValue()!=null) nNbReviewInFakeAPI = repoTest.getReviews().getValue().size();
 
         // 3 cases of invalid rate
         int[] aInvalidRates = new int[]{-1,0,6};
@@ -126,7 +129,8 @@ public class AddReviewUnitTest {
         RestaurantRepository repoTest = getRepoTestWithFakeAPI();
 
         // 5 reviews in fakeAPI
-        int nNbReviewInFakeAPI = repoTest.getReviews().getValue().size();
+        int nNbReviewInFakeAPI = 0;
+        if (repoTest.getReviews().getValue()!=null) nNbReviewInFakeAPI = repoTest.getReviews().getValue().size();
 
         // Add a review
         Review r = new Review("","http://jg.fr/pict1.jpg","comment",5);
@@ -160,7 +164,8 @@ public class AddReviewUnitTest {
         mokeRestaurantRepository = new RestaurantRepository(mokeFakeApi);
 
         // 0 review in mokeFakeAPI
-        int nNbReviewInFakeAPI = mokeRestaurantRepository.getReviews().getValue().size();
+        int nNbReviewInFakeAPI = 0;
+        if (mokeRestaurantRepository.getReviews().getValue()!=null) nNbReviewInFakeAPI = mokeRestaurantRepository.getReviews().getValue().size();
         assertEquals(0,nNbReviewInFakeAPI);
 
         // Add a review

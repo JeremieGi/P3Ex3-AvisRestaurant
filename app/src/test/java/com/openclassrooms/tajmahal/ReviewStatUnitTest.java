@@ -3,8 +3,6 @@ package com.openclassrooms.tajmahal;
 
 import static org.junit.Assert.assertEquals;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.openclassrooms.tajmahal.data.repository.RestaurantRepository;
 import com.openclassrooms.tajmahal.data.service.RestaurantFakeApi;
 import com.openclassrooms.tajmahal.domain.model.Review;
@@ -14,8 +12,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-
 import java.util.ArrayList;
 import java.util.List;
 

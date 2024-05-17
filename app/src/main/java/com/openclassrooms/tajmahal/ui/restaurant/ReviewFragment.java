@@ -163,7 +163,7 @@ public class ReviewFragment extends Fragment {
 
     /**
      * Transform error code in an understandable message for the user
-     * @param nErrorCode
+     * @param nErrorCode : Error code
      * @return : an understandable message for the user (FR or UK)
      */
     public String getExplicitMessage(int nErrorCode) {

@@ -1,8 +1,11 @@
 package com.openclassrooms.tajmahal.data.service;
 
 import com.openclassrooms.tajmahal.R;
+import com.openclassrooms.tajmahal.data.repository.RestaurantRepository;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,32 +81,43 @@ public class RestaurantFakeApi implements RestaurantApi {
      * @return : if there is a problem => Error code CST_ERROR_REVIEW_XXX, if everything is ok return 0
      */
     @Override
-    public int addReview(Review oReviewP) {
+    public int addReview(@NotNull Review oReviewP) {
+
+        // TODO : si oReviewP est nul, il vaut mieux gérer le cas ici via un code erreur ?
 
         int nErrorCode=0;
 
-        // Note
-        if (oReviewP.getRate()==0){
-            nErrorCode=CST_ERROR_REVIEW_WITH_NO_RATE;
+        if (oReviewP==null){
+            //nErrorCode=CST_ERROR_REVIEW_TO
+        }
+        else{
+            // TODO : je peux acceder au Repository ici ? => RestaurantRepository.CST_NOTE_MAX
+
+            // Note
+            if (oReviewP.getRate()<=0 || oReviewP.getRate()> RestaurantRepository.CST_NOTE_MAX){
+                nErrorCode=CST_ERROR_REVIEW_WITH_NO_RATE;
+            }
+
+            // Comment
+            if (oReviewP.getComment().isEmpty()){
+                nErrorCode=CST_ERROR_REVIEW_WITH_NO_COMMENT;
+            }
+
+            // UserName
+            if (oReviewP.getUsername().isEmpty()){
+                nErrorCode=CST_ERROR_REVIEW_WITH_NO_USER;
+            }
+
+            // required fields ok
+            if (nErrorCode==0){
+                reviews.add(0,oReviewP);
+                //  Only in the array reviews
+                //  TODO This method will be implemented by Priyanka
+                // an entry date/time should be added to the reviews to order them
+            }
         }
 
-        // Comment
-        if (oReviewP.getComment().isEmpty()){
-            nErrorCode=CST_ERROR_REVIEW_WITH_NO_COMMENT;
-        }
 
-        // UserName
-        if (oReviewP.getUsername().isEmpty()){
-            nErrorCode=CST_ERROR_REVIEW_WITH_NO_USER;
-        }
-
-        // required fields ok
-        if (nErrorCode==0){
-            reviews.add(0,oReviewP);
-            //  Only in the array reviews
-            //  TODO This method will be implemented by Priyanka
-            // an entry date/time should be added to the reviews to order them
-        }
 
         return nErrorCode;
     }

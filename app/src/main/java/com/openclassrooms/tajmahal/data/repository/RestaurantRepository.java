@@ -7,6 +7,8 @@ import com.openclassrooms.tajmahal.data.service.RestaurantApi;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,6 +59,7 @@ public class RestaurantRepository {
      * @return LiveData holding the restaurant details.
      */
     public LiveData<Restaurant> getRestaurant() {
+        // TODO : Est ce une bonne méthode que le repository renvoie directement du LiveData ? pas pratique pour les tests unitaires + j'aurai tendance à mettre le LiveData uniquement dans le ViewModel
         return new MutableLiveData<>(restaurantApi.getRestaurant());
     }
 
@@ -144,7 +147,7 @@ public class RestaurantRepository {
      * @param oReviewP : review to add
      * @return : if there is a problem => Error code CST_ERROR_REVIEW_XXX, if everything is ok return 0
      */
-    public int addReview(Review oReviewP) {
+    public int addReview(@NotNull Review oReviewP) {
         return restaurantApi.addReview(oReviewP);
     }
 
@@ -165,5 +168,10 @@ public class RestaurantRepository {
     /** Give the error code => NO COMMENT */
     public int get_error_review_with_no_comment() {
         return restaurantApi.CST_ERROR_REVIEW_WITH_NO_COMMENT;
+    }
+
+    /** Give the error code => NO USER */
+    public int get_error_review_with_no_user() {
+        return restaurantApi.CST_ERROR_REVIEW_WITH_NO_USER;
     }
 }

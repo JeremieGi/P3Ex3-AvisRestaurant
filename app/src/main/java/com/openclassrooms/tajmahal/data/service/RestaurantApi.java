@@ -3,6 +3,8 @@ package com.openclassrooms.tajmahal.data.service;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
@@ -59,7 +61,7 @@ public interface RestaurantApi {
      * @param oReviewP : review to add
      * @return : if there is a problem => Error code CST_ERROR_REVIEW_XXX, if everything is ok return 0
      */
-    int addReview(Review oReviewP);
+    int addReview(@NotNull Review oReviewP);
 
     /**
      * Test in the user has already give a review

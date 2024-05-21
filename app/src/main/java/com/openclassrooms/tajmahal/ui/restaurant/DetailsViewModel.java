@@ -62,7 +62,7 @@ public class DetailsViewModel extends ViewModel {
     public void calculateReviewsAverage() {
         if (this.restaurantRepository!=null){
             Double rAvg = restaurantRepository.getReviewsAverage();
-            oAverage.postValue(rAvg);
+            oAverage.setValue(rAvg);
         }
     }
 
@@ -72,7 +72,7 @@ public class DetailsViewModel extends ViewModel {
     public void calculateReviewsTotal() {
         if (this.restaurantRepository!=null){
             Integer nTotal = restaurantRepository.getTotalReviews();
-            oTotalReviews.postValue(nTotal);
+            oTotalReviews.setValue(nTotal);
         }
     }
 
@@ -123,7 +123,7 @@ public class DetailsViewModel extends ViewModel {
     public void calculateReviewsRepartition() {
         if (this.restaurantRepository!=null){
             int[] anRepartition = restaurantRepository.getReviewsRepartition();
-            oPercentPerNote.postValue(anRepartition);
+            oPercentPerNote.setValue(anRepartition);
         }
     }
 

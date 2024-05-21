@@ -32,24 +32,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        /**
-         * Listener of fragment changement in de fragment container
-         */
-        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
-
-            // get the current fragment
-            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
-
-            // fragment Détails
-            if (currentFragment.getClass() == DetailsFragment.class){
-                DetailsFragment fragmentDetail = (DetailsFragment) currentFragment;
-                if (fragmentDetail != null) {
-                    fragmentDetail.onChildFragmentClosed();
-                }
-            }
-
-
-        });
+//        /**
+//         * Listener of fragment changement in de fragment container
+//         */
+//        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+//
+//            // get the current fragment
+//            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+//
+//            // fragment Détails
+//            if (currentFragment.getClass() == DetailsFragment.class){
+//                DetailsFragment fragmentDetail = (DetailsFragment) currentFragment;
+//                if (fragmentDetail != null) {
+//                    fragmentDetail.onChildFragmentClosed();
+//                }
+//            }
+//
+//
+//        });
 
     }
 

@@ -92,13 +92,10 @@ public class DetailsFragment extends Fragment {
         // Observes changes in the restaurant data and updates the UI accordingly.
         detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant);
 
+        // TODO : Créer une classe pour regrouper
         detailsViewModel.oAverage.observe(requireActivity(), this::displayAverage);
         detailsViewModel.oTotalReviews.observe(requireActivity(), this::displayTotal);
         detailsViewModel.oPercentPerNote.observe(requireActivity(), this::displayPercentPerNote);
-
-        // Calculate averages
-        detailsViewModel.CalculateReviewsStat();
-
 
 
         // LISTENER
@@ -110,6 +107,14 @@ public class DetailsFragment extends Fragment {
 
     }
 
+    /**
+     * Called when the fragment is displayed
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        detailsViewModel.CalculateReviewsStat();
+    }
 
     /**
      * open fragment to add a new review or see all reviews
@@ -120,7 +125,7 @@ public class DetailsFragment extends Fragment {
        FragmentTransaction fragmentTransaction = fragmentManager
                 .beginTransaction()
                 .addToBackStack(null); // Used by the back button in toolbar
-       fragmentTransaction.add(R.id.container, reviewFragment).commit();
+       fragmentTransaction.replace(R.id.container, reviewFragment).commit();
     }
 
 
@@ -287,11 +292,11 @@ public class DetailsFragment extends Fragment {
     }
 
 
-    // TODO : Pas possible de faire plus simple que d'observer les changements du FragmentManager ?
-    /** This method is called when the fragment is displayed by the fragment Manager
-     *  see code in the activity */
-    public void onChildFragmentClosed() {
-        // Update stat data (average, count...)
-        detailsViewModel.CalculateReviewsStat();
-    }
+//    // Pas possible de faire plus simple que d'observer les changements du FragmentManager ?
+//    /** This method is called when the fragment is displayed by the fragment Manager
+//     *  see code in the activity */
+//    public void onChildFragmentClosed() {
+//        // Update stat data (average, count...)
+//        detailsViewModel.CalculateReviewsStat();
+//    }
 }

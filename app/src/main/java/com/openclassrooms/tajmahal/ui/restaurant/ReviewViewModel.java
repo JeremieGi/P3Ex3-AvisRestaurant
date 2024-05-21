@@ -79,9 +79,7 @@ public class ReviewViewModel extends ViewModel {
         int nCodeError = restaurantRepository.addReview(oReviewP);
 
         if (nCodeError==0){
-            // TODO : A la sortie de cet appel aListReviews est bien modifié
-            //  mais l'observer non appelé, il faut que je l'appelle explicitement : normal ?
-            aListReviews.postValue(aListReviews.getValue());
+            aListReviews.setValue(aListReviews.getValue());
         }
 
         return nCodeError;

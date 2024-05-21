@@ -84,8 +84,6 @@ public class RestaurantFakeApi implements RestaurantApi {
 
         int nErrorCode=0;
 
-        // TODO : je peux acceder au Repository ici ? => RestaurantRepository.CST_NOTE_MAX
-
         // Note
         if (oReviewP.getRate()<=0 || oReviewP.getRate()> RestaurantRepository.CST_NOTE_MAX){
             nErrorCode=CST_ERROR_REVIEW_WITH_NO_RATE;
@@ -105,7 +103,7 @@ public class RestaurantFakeApi implements RestaurantApi {
         if (nErrorCode==0){
             reviews.add(0,oReviewP);
             //  Only in the array reviews
-            //  TODO This method will be implemented by Priyanka
+            //  This method will be implemented by Priyanka
             // an entry date/time should be added to the reviews to order them
         }
         

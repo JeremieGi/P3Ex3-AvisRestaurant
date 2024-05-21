@@ -56,7 +56,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
-        // #TODO : Warning : It will always be more efficient to use more specific change events if you can. Rely on 'notifyDataSetChanged' as a last resort.
+        // Warning : It will always be more efficient to use more specific change events if you can. Rely on 'notifyDataSetChanged' as a last resort.
         notifyDataSetChanged(); // refresh the recycler view
     }
 

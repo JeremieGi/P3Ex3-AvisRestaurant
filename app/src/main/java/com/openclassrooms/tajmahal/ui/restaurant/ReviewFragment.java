@@ -94,7 +94,7 @@ public class ReviewFragment extends Fragment {
 
         // Recycler View
         binding.fragmentReviewRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.fragmentReviewRecyclerview.setHasFixedSize(true); // TODO : quand le mettre exactement ?
+        binding.fragmentReviewRecyclerview.setHasFixedSize(true);
         reviewAdapter = new ReviewAdapter();
         binding.fragmentReviewRecyclerview.setAdapter(reviewAdapter);
 
@@ -147,13 +147,13 @@ public class ReviewFragment extends Fragment {
             //disableReviewEntry(); // Will be call in updateUIWithReviews
         }else{
 
-            // TODO : Le repository renvoie un code erreur et j'affiche les messages depuis le fragment pour avoir accès au ressource et conserver les couches indépendantes
+            // Le repository renvoie un code erreur et j'affiche les messages depuis le fragment pour avoir accès au ressource et conserver les couches indépendantes
             // On est obligé d'utiliser des accesseurs pour les codes d'erreurs ? On peut les mettre en globales du projets ou ca va créer des dépendances ?
             String sErrorMessage = getExplicitMessage(nErrorCode);
 
             // Toast message
             Toast toast = Toast.makeText(requireContext(), sErrorMessage, Toast.LENGTH_LONG);
-            // TODO : Toast s'affiche toujours en bas
+            // Toast s'affiche toujours en bas....
             toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
         }

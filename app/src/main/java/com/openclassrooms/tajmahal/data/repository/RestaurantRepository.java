@@ -59,10 +59,11 @@ public class RestaurantRepository {
      * @return LiveData holding the restaurant details.
      */
     public LiveData<Restaurant> getRestaurant() {
-        // TODO : Est ce une bonne méthode que le repository renvoie directement du LiveData ? pas pratique pour les tests unitaires + j'aurai tendance à mettre le LiveData uniquement dans le ViewModel
+        // Est ce une bonne méthode que le repository renvoie directement du LiveData ? pas pratique pour les tests unitaires + j'aurai tendance à mettre le LiveData uniquement dans le ViewModel
         return new MutableLiveData<>(restaurantApi.getRestaurant());
     }
 
+    /** Get all reviews*/
     public MutableLiveData<List<Review>> getReviews() {
         return new MutableLiveData<>(restaurantApi.getReviews());
     }
@@ -126,6 +127,7 @@ public class RestaurantRepository {
                     anPercentPerNote[nRate]++;
                 }
                 else{
+                    // TODO : possible de breaker directement ici en cas d'erreur ?
                     assert false : "Incorrect rate : "+nRate;
                 }
             }

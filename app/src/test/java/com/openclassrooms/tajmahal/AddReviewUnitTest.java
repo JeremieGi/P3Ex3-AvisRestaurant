@@ -8,9 +8,13 @@ import com.openclassrooms.tajmahal.data.service.RestaurantFakeApi;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -19,7 +23,7 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.class)
 public class AddReviewUnitTest {
 
-    // TODO : Review des tests
+    // TODO : Review des tests -> Perimetre uniquement addReview + classe Repository uniquement pas ViewModel ?
 
     /**
      * Init the repository
@@ -35,6 +39,7 @@ public class AddReviewUnitTest {
      * Test add review in normal use
      */
     @Test
+    @DisplayName("Add a review - Normal case")
     public void test_addReview_classic() {
 
         // Use FakeApi
@@ -92,8 +97,9 @@ public class AddReviewUnitTest {
     /**
      * Test add review without rate => error
      */
-    @Test
-    public void test_addReview_without_rate() {
+    @ParameterizedTest(name = "{0} is an incorrect rate")
+    @ValueSource(ints = {-1,0,6}) // 3 cases of invalid rate
+    public void test_addReview_without_rate(int args) {
 
         // Use FakeApi
         RestaurantRepository repoTest = getRepoTestWithFakeAPI();
@@ -102,19 +108,14 @@ public class AddReviewUnitTest {
         int nNbReviewInFakeAPI = 0;
         if (repoTest.getReviews().getValue()!=null) nNbReviewInFakeAPI = repoTest.getReviews().getValue().size();
 
-        // 3 cases of invalid rate
-        int[] aInvalidRates = new int[]{-1,0,6};
-        for (int nInvalidRateTest : aInvalidRates){
+        // Add a review
+        Review r = new Review("username","http://jg.fr/pict1.jpg","comment",args);
+        int nErrorCode = repoTest.addReview(r);
+        // One review more in fakeAPI
+        assertEquals(repoTest.get_error_review_with_no_rate(),nErrorCode);
+        // No added review in fakeAPI
+        assertEquals(repoTest.getReviews().getValue().size(),nNbReviewInFakeAPI);
 
-            // Add a review
-            Review r = new Review("username","http://jg.fr/pict1.jpg","comment",nInvalidRateTest);
-            int nErrorCode = repoTest.addReview(r);
-            // One review more in fakeAPI
-            assertEquals(repoTest.get_error_review_with_no_rate(),nErrorCode);
-            // No added review in fakeAPI
-            assertEquals(repoTest.getReviews().getValue().size(),nNbReviewInFakeAPI);
-
-        }
 
         System.out.println("test_addReview_without_rate OK");
     }
@@ -153,7 +154,7 @@ public class AddReviewUnitTest {
      */
     @Mock
     RestaurantFakeApi mokeFakeApi;
-    RestaurantRepository mokeRestaurantRepository;
+
     @Test
     public void test_addReview_EmptyReviews() {
 
@@ -161,7 +162,7 @@ public class AddReviewUnitTest {
         List<Review> listReviews = new ArrayList<>();
         Mockito.when(mokeFakeApi.getReviews()).thenReturn(listReviews);
 
-        mokeRestaurantRepository = new RestaurantRepository(mokeFakeApi);
+        RestaurantRepository mokeRestaurantRepository = new RestaurantRepository(mokeFakeApi);
 
         // 0 review in mokeFakeAPI
         int nNbReviewInFakeAPI = 0;
@@ -175,7 +176,7 @@ public class AddReviewUnitTest {
         // One review more in fakeAPI
         assertEquals(0,nErrorCode);
 
-        // TODO : Ici on a bune liste vide, OK car le mock est encore actif
+        // TODO : Ici on a une liste vide, OK car le mock est encore actif
         List<Review> reviewsAvt = mokeRestaurantRepository.getReviews().getValue();
 
         // Rétablissement du comportement par défaut

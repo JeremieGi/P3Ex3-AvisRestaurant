@@ -82,8 +82,6 @@ public class RestaurantFakeApi implements RestaurantApi {
     @Override
     public int addReview(@NotNull Review oReviewP) {
 
-        // TODO : si oReviewP est nul, il vaut mieux gérer le cas ici via un code erreur ?
-
         int nErrorCode=0;
 
         // TODO : je peux acceder au Repository ici ? => RestaurantRepository.CST_NOTE_MAX

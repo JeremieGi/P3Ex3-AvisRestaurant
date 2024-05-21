@@ -27,6 +27,8 @@ android {
             )
         }
     }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -36,6 +38,20 @@ android {
         viewBinding = true
     }
 
+
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
+tasks.whenTaskAdded {
+    if (name == "assembleDebug" || name == "assembleRelease") {
+        finalizedBy("testDebugUnitTest")
+    }
 }
 
 dependencies {
@@ -55,11 +71,21 @@ dependencies {
     implementation("androidx.work:work-runtime:2.8.1")
     implementation("androidx.core:core-splashscreen:1.0.0")
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
     implementation("org.mockito:mockito-core:3.12.4")
 
     implementation("com.squareup.picasso:picasso:2.71828")
+
+    // JUnit 5 dependencies
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    testImplementation("org.junit.vintage:junit-vintage-engine:5.8.2") // If you want to run JUnit 4 tests as well
+
+    // Optional: Additional dependencies for JUnit 5 features
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.2")
+
+    // Android test dependencies
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
+
+

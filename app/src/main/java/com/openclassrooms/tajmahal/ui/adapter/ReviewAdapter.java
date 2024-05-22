@@ -19,19 +19,28 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     private List<Review> reviews;
 
 
-
-    // Create new views (invoked by the layout manager) and call ReviewViewHolder
+    /**
+     *
+     * @param parent The ViewGroup into which the new View will be added after it is bound to
+     *               an adapter position.
+     * @param viewType The view type of the new View.
+     *
+     * @return : created ViewHolder
+     */
     @NonNull
     @Override
     public ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater adapterLayout = LayoutInflater.from(parent.getContext());
-//        View view = adapterLayout.inflate(R.layout.item_review, parent, false);
-//        return new ReviewViewHolder(view);
         ItemReviewBinding binding = ItemReviewBinding.inflate(adapterLayout, parent, false);
         return new ReviewViewHolder(binding);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
+    /**
+     * Replace the contents of a view (invoked by the layout manager)
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     *        item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
 
@@ -54,12 +63,19 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         return reviews.size();
     }
 
+    /**
+     * Set the reviews list
+     * @param reviews : Reviews list to display
+     */
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
         // Warning : It will always be more efficient to use more specific change events if you can. Rely on 'notifyDataSetChanged' as a last resort.
         notifyDataSetChanged(); // refresh the recycler view
     }
 
+    /**
+     * Holder class
+     */
     public static class ReviewViewHolder extends RecyclerView.ViewHolder {
 
         // Binding in ViewHolder

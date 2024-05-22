@@ -1,8 +1,6 @@
 package com.openclassrooms.tajmahal.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.View;
@@ -30,26 +28,6 @@ public class MainActivity extends AppCompatActivity {
                     .replace(R.id.container, DetailsFragment.newInstance())
                     .commitNow();
         }
-
-
-//        /**
-//         * Listener of fragment changement in de fragment container
-//         */
-//        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
-//
-//            // get the current fragment
-//            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
-//
-//            // fragment Détails
-//            if (currentFragment.getClass() == DetailsFragment.class){
-//                DetailsFragment fragmentDetail = (DetailsFragment) currentFragment;
-//                if (fragmentDetail != null) {
-//                    fragmentDetail.onChildFragmentClosed();
-//                }
-//            }
-//
-//
-//        });
 
     }
 

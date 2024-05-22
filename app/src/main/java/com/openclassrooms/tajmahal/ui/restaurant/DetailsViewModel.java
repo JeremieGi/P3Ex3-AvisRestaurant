@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.data.repository.RestaurantRepository;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
+import com.openclassrooms.tajmahal.domain.model.RestaurantStat;
 
 import javax.inject.Inject;
 
@@ -31,10 +32,7 @@ public class DetailsViewModel extends ViewModel {
 
     // States observed by the DetailsFragment
 
-    MutableLiveData<Double> oAverage = new MutableLiveData<>();
-    MutableLiveData<Integer> oTotalReviews = new MutableLiveData<>();
-    MutableLiveData<int[]> oPercentPerNote = new MutableLiveData<>();
-
+    MutableLiveData<RestaurantStat> oStat = new MutableLiveData<>();
 
 
     /**
@@ -55,27 +53,6 @@ public class DetailsViewModel extends ViewModel {
     public LiveData<Restaurant> getTajMahalRestaurant() {
         return restaurantRepository.getRestaurant();
     }
-
-    /**
-     * Calculate the average and post the value to the fragment
-     */
-    public void calculateReviewsAverage() {
-        if (this.restaurantRepository!=null){
-            Double rAvg = restaurantRepository.getReviewsAverage();
-            oAverage.setValue(rAvg);
-        }
-    }
-
-    /**
-     * Calculate the total of reviews and post the value to the fragment
-     */
-    public void calculateReviewsTotal() {
-        if (this.restaurantRepository!=null){
-            Integer nTotal = restaurantRepository.getTotalReviews();
-            oTotalReviews.setValue(nTotal);
-        }
-    }
-
 
 
     /**
@@ -116,23 +93,18 @@ public class DetailsViewModel extends ViewModel {
         return dayString;
     }
 
-    /**
-     * Calculate the reviews repartition by rate (0,1...5)
-     *  in percentage (value 0 .. 100)
-     */
-    public void calculateReviewsRepartition() {
-        if (this.restaurantRepository!=null){
-            int[] anRepartition = restaurantRepository.getReviewsRepartition();
-            oPercentPerNote.setValue(anRepartition);
-        }
-    }
+
 
     /**
      * Update stat data of restaurant
      */
     public void CalculateReviewsStat() {
-        calculateReviewsAverage();
-        calculateReviewsTotal();
-        calculateReviewsRepartition();
+        if (this.restaurantRepository!=null){
+            double rAvg = restaurantRepository.getReviewsAverage();
+            int nTotal = restaurantRepository.getTotalReviews();
+            int[] anRepartition = restaurantRepository.getReviewsRepartition();
+            oStat.setValue(new RestaurantStat(rAvg,nTotal,anRepartition));
+        }
+
     }
 }

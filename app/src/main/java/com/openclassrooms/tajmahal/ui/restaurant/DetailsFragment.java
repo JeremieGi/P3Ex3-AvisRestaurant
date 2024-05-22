@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.FragmentDetailsBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
+import com.openclassrooms.tajmahal.domain.model.RestaurantStat;
 
 import java.text.DecimalFormat;
 
@@ -92,11 +93,8 @@ public class DetailsFragment extends Fragment {
         // Observes changes in the restaurant data and updates the UI accordingly.
         detailsViewModel.getTajMahalRestaurant().observe(requireActivity(), this::updateUIWithRestaurant);
 
-        // TODO : Créer une classe pour regrouper
-        detailsViewModel.oAverage.observe(requireActivity(), this::displayAverage);
-        detailsViewModel.oTotalReviews.observe(requireActivity(), this::displayTotal);
-        detailsViewModel.oPercentPerNote.observe(requireActivity(), this::displayPercentPerNote);
-
+        // Stat in a specific object RestaurantStat
+        detailsViewModel.oStat.observe(requireActivity(), this::displayStat);
 
         // LISTENER
         binding.buttonAddReview.setOnClickListener(v -> {
@@ -105,6 +103,16 @@ public class DetailsFragment extends Fragment {
         });
 
 
+    }
+
+    /**
+     * Display all restaurant stats
+     * @param restaurantStat : Restaurant stat to display
+     */
+    private void displayStat(RestaurantStat restaurantStat) {
+        displayAverage(restaurantStat.getdAverage());
+        displayTotal(restaurantStat.getnTotalReviews());
+        displayPercentPerNote(restaurantStat.getAnPercentPerNote());
     }
 
     /**
@@ -237,8 +245,6 @@ public class DetailsFragment extends Fragment {
     }
 
 
-
-
     /**
      * Opens the provided address in Google Maps or shows an error if Google Maps
      * is not installed.
@@ -292,11 +298,4 @@ public class DetailsFragment extends Fragment {
     }
 
 
-//    // Pas possible de faire plus simple que d'observer les changements du FragmentManager ?
-//    /** This method is called when the fragment is displayed by the fragment Manager
-//     *  see code in the activity */
-//    public void onChildFragmentClosed() {
-//        // Update stat data (average, count...)
-//        detailsViewModel.CalculateReviewsStat();
-//    }
 }

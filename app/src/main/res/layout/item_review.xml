@@ -56,8 +56,7 @@
         android:progressTint="@color/yellowStar"
         android:backgroundTint="@color/borderdadada"
         app:layout_constraintStart_toStartOf="@id/item_review_tvUserName"
-        app:layout_constraintBottom_toBottomOf="@id/item_review_imgUser" />/>
-
+        app:layout_constraintBottom_toBottomOf="@id/item_review_imgUser" />
 
 
     <TextView

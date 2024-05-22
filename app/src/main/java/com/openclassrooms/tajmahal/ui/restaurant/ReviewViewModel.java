@@ -78,6 +78,7 @@ public class ReviewViewModel extends ViewModel {
         // Ajout dans le repository (pour que l'avis reste en mémoire de l'appli)
         int nCodeError = restaurantRepository.addReview(oReviewP);
 
+        // Add OK
         if (nCodeError==0){
             aListReviews.setValue(aListReviews.getValue());
         }

@@ -72,7 +72,7 @@ public class RestaurantRepository {
      * Calculate the reviews average
      * @return reviews average
      */
-    public Double getReviewsAverage() {
+    public double getReviewsAverage() {
 
         // Call the API
         List<Review> reviews = restaurantApi.getReviews();
@@ -100,7 +100,7 @@ public class RestaurantRepository {
      * Total of reviews
      * @return Total of reviews
      */
-    public Integer getTotalReviews() {
+    public int getTotalReviews() {
         return restaurantApi.getReviews().size();
     }
 

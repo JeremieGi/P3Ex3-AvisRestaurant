@@ -45,13 +45,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
 
         Review itemReview = reviews.get(position);
-
-        // Picasso : A powerful image downloading and caching library for Android.
-        Picasso.get().load(itemReview.getPicture()).into(holder.itemBinding.itemReviewImgUser);
-
-        holder.itemBinding.itemReviewTvUserName.setText(itemReview.getUsername());
-        holder.itemBinding.itemReviewRbUserNote.setRating(itemReview.getRate());
-        holder.itemBinding.itemReviewComment.setText(itemReview.getComment());
+        holder.bind(itemReview);
 
     }
 
@@ -79,11 +73,24 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
     public static class ReviewViewHolder extends RecyclerView.ViewHolder {
 
         // Binding in ViewHolder
-        public ItemReviewBinding itemBinding;
+        private ItemReviewBinding itemBinding;
 
         ReviewViewHolder(ItemReviewBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
+        }
+
+        /**
+         * Display data in the item layout
+         * @param itemReview : Review
+         */
+        public void bind(Review itemReview) {
+            // Picasso : A powerful image downloading and caching library for Android.
+            Picasso.get().load(itemReview.getPicture()).into(itemBinding.itemReviewImgUser);
+
+            itemBinding.itemReviewTvUserName.setText(itemReview.getUsername());
+            itemBinding.itemReviewRbUserNote.setRating(itemReview.getRate());
+            itemBinding.itemReviewComment.setText(itemReview.getComment());
         }
     }
 }

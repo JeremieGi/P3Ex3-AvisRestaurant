@@ -190,7 +190,6 @@ public class DetailsFragment extends Fragment {
         // Format the average
         DecimalFormat format = new DecimalFormat("#.0");
         String sAvg = format.format(rAverage);
-
         binding.tvReviewsAverage.setText(sAvg);
 
         float fNote = rAverage.floatValue();
